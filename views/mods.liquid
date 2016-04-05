@@ -1,0 +1,29 @@
+{% include "header" %}
+
+<a id="back" href="/">&lt; Back</a>
+
+<h2>Mods Search</h2>
+<p>
+	Search for mods. <a href="/mods/">All Mods</a>.
+</p>
+
+<form action="/mods/" method="get">
+	<input type="text" name="q" placeholder="Search" value="{{ search }}">
+	<input type="submit" value="Go">
+</form>
+
+<ul>
+{% for mod in mods %}
+	<li>
+		<a href="https://forum.minetest.net/viewtopic.php?t={{ mod.topicId }}">{{ mod.title }}</a> by {{ mod.author }}<br />
+		<p>
+			{{ mod.description | truncate: 100, '…' }}
+		</p>
+		<a href="{{ mod.link }}">Download</a> |
+		<a href="https://forum.minetest.net/viewtopic.php?t={{ mod.topicId }}">Forum Topic</a> |
+		<a href="/status/?a={{ mod.author }}">{{ mod.author }}'s mods</a>
+	</li>
+{% endfor %}
+</ul>
+
+{% include "footer" %}

@@ -1,0 +1,6 @@
+{
+	"github_auth": "INSERT_OAUTH_KEY_HERE",
+	"listfile": "out/list.json",
+	"lookupfile": "out/lookup.json",
+	"debugout": ""
+}

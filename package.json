@@ -1,0 +1,27 @@
+{
+  "name": "node-mtmods4android",
+  "version": "0.1.0",
+  "description": "Minetest Mods for Android NodeJS Backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/rubenwardy/app-mtmm"
+  },
+  "keywords": [
+    "minetest",
+    "mods",
+    "webserver"
+  ],
+  "author": "rubenwardy",
+  "license": "LGPL 2.1 or Later",
+  "dependencies": {
+    "apicache": "0.0.12",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "express-liquid": "^0.2.6"
+  }
+}

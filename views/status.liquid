@@ -1,0 +1,28 @@
+{% include "header" %}
+
+<a id="back" href="/">&lt; Back</a>
+
+<h2>Author Search</h2>
+<p>
+	Enter your forum username to find your mods.
+</p>
+
+<form action="/status/" method="get">
+	<input type="text" name="a" placeholder="Forum Username" value="{{ author }}">
+	<input type="submit" value="Go">
+</form>
+
+{% if error %}
+<p class="wrong">{{ error }}</p>
+{% endif %}
+
+<ul>
+{% for mod in mods %}
+	<li class="{% if mod.msg != "added" %}wrong{% else %}right{% endif %}">
+		<a href="https://forum.minetest.net/viewtopic.php?t={{ mod.topicId }}">{{ mod.title }}</a><br />
+		{{ mod.msg }}
+	</li>
+{% endfor %}
+</ul>
+
+{% include "footer" %}

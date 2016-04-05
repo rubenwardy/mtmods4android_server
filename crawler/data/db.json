@@ -1,0 +1,188 @@
+{
+    "sapier/monorail": {
+        "description": "Version 0.0.6\nMonorail mod similar to carts.\n-Ridable cart\n-Transport cart\n-Mesecon integration (optional)\n"
+    },
+    "racsorhodes/travelpoints": {
+        "description": "Travelpoints 1.4 2015-03-27\n\nSave world specific bookmarks to locations you travel to as \"travelpoints\", then easily teleport to those travelpoints.\n\nYou can also create transporter pads whose destination can be set to an existing travelpoint, no need to ever enter coords by hand.\n\nFor a complete list of available chat commands see readme.txt."
+    },
+    "rubenwardy/food": {
+        "description": "The largest supporting food mod for Minetest. Adds soups, cakes, bakes and juices.\n"
+    },
+    "nore/mg": {
+        "description": "This mod changes the default map generation: it changes the way ores are placed, add new biomes and villages.\nNote: do NOT use it in an already generated world!!!"
+    },
+    "rubenwardy/awards": {
+        "description": "Adds achievements to Minetest, and an API to register new ones.\n"
+    },
+    "excalibur zero/brazier": {
+        "description": "This is a mod for Minetest that adds fire braziers.\n"
+    },
+    "heroofthewinds/lockpicks": {
+        "description": "Adds lockpicks to Minetest and updates most locked objects to be breakable."
+    },
+    "evergreen/death_messages": {
+        "description": "A Minetest mod which sends a chat message when a player dies.\n"
+    },
+    "evergreen/quartz": {
+        "description": "Adds quartz ore and some decorative quartz blocks\n"
+    },
+    "joz/railcorridors": {
+        "description": "This mod tries to imitate the known rail corridors of Minecraft.\n\nDiese Modifikation versucht die aus Minecraft bekannten Minenschächte mit Schienen nachzubilden.\n"
+    },
+    "excalibur zero/moretechnictools": {
+        "description": "This is a Minetest mod that adds more Technic tools.\n"
+    },
+    "don/myroofs": {
+        "description": "This is a Minetest mod that adds mesh roofing nodes.\n"
+    },
+    "vanessae/nixie_tubes": {
+        "description": "This mod provides a set of classic Nixie tubes, and a set of alphanumeric 15-segment tubes similar to Burroughs B-7971, controlled by Mesecons' Digilines mod.\n"
+    },
+    "bobomb/realterrain": {
+        "description": "A mapgen mod that allows any image to be used as a heightmap. If the image is not grayscale then the red channel is used. A tool is provided to change settings in-game.\n"
+    },
+    "rubenwardy/jump": {
+        "description": "Jump across stilts forever. Completely modifies the gameplay of Minetest.\n"
+    },
+    "rubenwardy/diet": {
+        "description": "Adds a mechanic to encourage food variety.\n"
+    },
+    "rubenwardy/vote": {
+        "description": "Adds an API to allow players to vote, also adds kick voting.\n"
+    },
+    "dragonop/claycrafter": {
+        "description": "Craft clay out of compressed dirt.\n"
+    },
+    "rubenwardy/chatplus": {
+        "description": "Adds chat functions such as ignoring, distance limiting, and swear filtering.\nAlso provides a powerful API, and optionally allows distance limiting.\n"
+    },
+    "don/cutepie": {
+        "description": "Cute blocks with a happy feel to them.\n"
+    },
+    "rubenwardy/email": {
+        "description": "Adds email style inboxes to Minetest.\n"
+    },
+    "jp/craftguide": {
+        "description": "A simple, flexible and efficient Crafting Guide.\n"
+    },
+    "chinchow/ethereal": {
+        "description": "Ethereal mod uses the v7 mapgen to add many new biomes to the world."
+    },
+    "sapier/factions": {
+        "description": "Version 1.1.5\n\nMod for handling in game factions and reputation\n\n\n"
+    },
+    "rubenwardy/forceload": {
+        "description": "Keeps areas of the map loaded even when players are not online.\n"
+    },
+    "don/myboardgames": {
+        "description": "This is a modpack with 16 mini games. It includes chess, checkers, connect 4, uno and more.\n"
+    },
+    "don/myitemchest": {
+        "description": "A chest the spawns items when opened.\n"
+    },
+    "rubenwardy/privilegeareas": {
+        "description": "Granting and revoking privileges based on position on the map.\n"
+    },
+    "kilarin/bridgetool": {
+        "description": "This mod adds a new \"bridge tool\" that makes placing stone (or glass, earth, or any material) while building a bridge in no-fly mode easy.\n"
+    },
+    "yugiohjcj/interaction_areas": {
+        "description": "A minetest mod to manage interaction areas.\n"
+    },
+    "rubenwardy/aliases": {
+        "description": "Adds chat command aliases.\n"
+    },
+    "byakuren/global_exchange": {
+        "description": "Adds a server-wide commodities (item) exchange.\n"
+    },
+    "splizard/lifter": {
+        "description": "Simply craft the lift with the following craft recipe:\n\nwood stick wood\nwood mese wood\nwood stick wood\n\nNow place your lift in a shaft or next to a wall. Right click on your lift to get on it and then tap spacebar to go up a level or tap shift to go down a level...\nSo easy!!!\nIf you want to stop the lift at any time, press the \"use\" key.\nNow that you have reached your destination simply walk off the lift :)\n"
+    },
+    "byakuren/loot": {
+        "description": "A loot framework. Also adds loot to dungeons.\n"
+    },
+    "don/mychisel": {
+        "description": "A chisel that allows you to shape blocks.\n\nTo craft a chisel just put a steel ingot and a brown wool in the crafting grid. The steel goes above the wool.\n\nOnce you have your chisel you can set the style by right clicking. \n\nThere are 5 styles to choose from\n- horizontal groove\n- vertical groove\n- cross groves (this matches up with the vertical and horizontal grooves\n- square\n- 4 edges\n\nRight click until you see the style you want in the chat then point at the node and left click.\nEach node can be cut 4 times. Each time you chisel the groove will get a little deeper.\n\nOnly certain nodes can be chiseled. Here are the supported nodes\n\n\n\tCobble\n\tSandstone\n\tClay\n\tCoal Block\n\tStone\n\tDesert Stone\"\n\tWood\n\tAcacia Wood\n\tAspen Wood\n\tPine Wood\n\tDesert Cobble\n\tJungle Wood\n\tSandstone Brick\n\tStone Brick\n\tDesert Stone Brick\n\nLicence - WTFPL\n\nForum - https://forum.minetest.net/viewtopic.php?f=11&t=13104\n"
+    },
+    "don/mydeck": {
+        "description": "Make realistic looking decks on your house.\n"
+    },
+    "don/mypaths": {
+        "description": "Dirt and stone paths.\n"
+    },
+    "rui/playeranim": {
+        "description": "Adds animations to the players' head and right arm.\n"
+    },
+    "sofar/sedimentology-mt": {
+        "description": "A mod that adds realistic erosion and degradation of rocks.\n"
+    },
+    "jp/spectator_mode": {
+        "description": "A mod for Minetest allowing you to watch other players in their 3rd person view.\nYou're invisible and undetectable for the players when you're in this mode.\n"
+    },
+    "jp/workbench": {
+        "description": "A mod adding a Work Bench for Minetest.\n"
+    },
+    "byakuren/multiblock": {
+        "description": "A library for matching block structures.\n"
+    },
+    "tenplus1/farming": {
+        "description": "Adds many plants and food to Minetest"
+    },
+    "tenplus1/mobs": {
+        "description": "Adds many farm animals, wild animals and monsters."
+    },
+    "don/mycorners": {
+        "description": "Put decorative corners on blocks.\n\nmycorners makes it so you can add  corners on blocks like the corners of castles and houses. \n\nJust build a machine and make your cornerboards. You can add the corners to blocks in the machine or use the hammer to set them.\n\nYou will have beautiful buildings in no time.\n"
+    },
+    "don/mywoodslopes": {
+        "description": "Make slopes with wood blocks.\n"
+    },
+    "evergreen/trash_can": {
+        "description": "This mod adds a wooden trash can, and a dumpster to the game.  Right click it, put in your trash, and click the empty trash button.\n"
+    },
+    "stu/wield3d": {
+        "description": "Visible 3d wielded items for Minetest.\nAdds 3d wield-items that are visible in third person view and to other players.\n"
+    },
+    "byakuren/monoidal_effects": {
+        "description": "monoidal_effects is a framework for player status effects and state that allows\nmultiple effects to affect the same state at once.\n"
+    },
+    "byakuren/armor_monoid": {
+        "description": "A monoidal_effects monoid for armor\n"
+    },
+    "don/mydoors": {
+        "description": "Several different style doors.\n"
+    },
+    "sofar/crops": {
+        "description": "This mod expands the basic set of farming-related crops that minetest_game offers. It adds melons, potatoes, tomatoes, green beans and corn. The mod also implements plant humidity - you will have to water plants to make sure they're not dried out, or make sure they don't get over-watered.\n\nMod specific settings can be changed in the \"crops_settings.txt\" file in the world folder.\n\nFor more information, go to: http://goo.gl/wf0XLh\n"
+    },
+    "jp/enchanting": {
+        "description": "A mod adding a Minecraft-inspired Enchantment Table to Minetest.\n"
+    },
+    "jp/realchess": {
+        "description": "Play a life-like chess game (formspec-based).\n"
+    },
+    "rubenwardy/report": {
+        "description": "Allows players to report misconduct or bugs using /report.\n"
+    },
+    "sakel/spawners": {
+        "description": "This mod adds several creatures to Minetest, including zombies, ghosts, and sheep.\n"
+    },
+    "heroofthewinds/caverealms": {
+        "description": "A mod for Minetest to add underground realms.\n"
+    },
+    "philipbenr/castles": {
+        "description": "This is a mod all about creating castles and castle dungeons. Many of the nodes are used for the outer-walls or dungeons.\n"
+    },
+    "stu/minetest-3d_armor": {
+        "description": "Visible player armor & wielded items.\n"
+    },
+    "stu/shooter": {
+        "description": "First person shooter mod.\nAdds firearms plus a few other fun items.\n"
+    },
+    "sofar/torches": {
+        "description": "Mesh-based torches - three dimensional torches for minetest.\n"
+    },
+    "napiophelios/alignedbricks": {
+        "description": "This mod aligns all sides of default brick nodes\nto maintain a continuous staggered pattern\nfrom all points of view.\n"
+    }
+}

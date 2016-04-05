@@ -1,0 +1,30 @@
+{% include "header" %}
+
+<h2>Mods Search</h2>
+<p>
+	Search for mods. <a href="/mods/">All Mods</a>.
+</p>
+
+<form action="/mods/" method="get">
+	<input type="text" name="q" placeholder="Search" value="{{ search }}">
+	<input type="submit" value="Go">
+</form>
+
+<h2>Author Search</h2>
+<p>
+	Enter your forum username to find your mods.
+</p>
+
+<form action="/status/" method="get">
+	<input type="text" name="a" placeholder="Forum Username">
+	<input type="submit" value="Go">
+</form>
+
+<h2>Mod List Information</h2>
+
+<p>
+	<a href="/blacklist/">Blacklist</a><br />
+	<a href="/verified/">Verified Links</a>
+</p>
+
+{% include "footer" %}

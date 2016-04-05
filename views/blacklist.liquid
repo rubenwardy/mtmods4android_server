@@ -1,0 +1,17 @@
+{% include "header" %}
+
+<a id="back" href="/">&lt; Back</a>
+
+<h2>Blacklisted Links</h2>
+<p>
+	Links are blacklisted if we know them to be incorrect,
+	or if it's a single download for all of an author's mods.
+</p>
+
+<ul>
+{% for link in links %}
+	<li>{{ link }}</li>
+{% endfor %}
+</ul>
+
+{% include "footer" %}
