@@ -1,5 +1,7 @@
 # Nodejs-MtMods4Android
 
+LGPL 2.1 or later.
+
 Two parts:
 
 1. NodeJS server
