@@ -31,6 +31,7 @@ function make_head_request(item) {
 	if (et) {
 		return false;
 	}
+	console.log("Polling " + item.link + " for " + item.author + "/" + item.name);
 
 	running++;
 
@@ -72,6 +73,10 @@ function make_head_request(item) {
 					add_url(item, (res.statusCode == 200) ? -1 : res.statusCode, size);
 				}
 			}
+		});
+		req.on('error', function(error) {
+                         add_url(item, -2, 0);
+		        console.log(error);
 		});
 		req.end();
 	} catch (e) {
@@ -127,6 +132,10 @@ function make_get_request(item) {
 
 			}
 		});
+		req.on('error', function(error) {
+                         add_url(item, -2, 0);
+                        console.log(error);
+                });
 		req.end();
 	} catch (e) {
 		running--;

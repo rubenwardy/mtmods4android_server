@@ -28,7 +28,7 @@ app.engine('liquid', expressLiquid(options));
 app.use(expressLiquid.middleware);
 
 app.get('/', function (req, res) {
-    res.render('index', {title: "Mod Developer Panel"});
+    res.render('index', {title: "Mod Developer Panel", mods: model.getPopularMods()});
 });
 
 app.get('/status', function (req, res) {
@@ -89,13 +89,15 @@ app.get('/v1/list', apicache('5 minutes'), function (req, res) {
 });
 
 app.post('/v1/on-download', function(req, res) {
+    var fs = require("fs");
     var modname = req.body.modname;
     var link    = req.body.link;
     var size    = req.body.size;
     var respcode  = req.body.status;
     var author  = req.body.author || "";
+    var error = req.body.error || "";
 
-    fs.appendFileSync("downloads.txt", respcode + "\t" + size + "\t" + author + "\t" + modname + "\t" + link + "\n");
+    fs.appendFileSync("downloads.txt", respcode + "\t" + size + "\t" + author + "\t" + modname + "\t" + link + "\t" + error + "\n");
     res.end("OK");
 });
 

@@ -1,15 +1,5 @@
 {% include "header" %}
 
-<h2>Mods Search</h2>
-<p>
-	Search for mods. <a href="/mods/">All Mods</a>.
-</p>
-
-<form action="/mods/" method="get">
-	<input type="text" name="q" placeholder="Search" value="{{ search }}">
-	<input type="submit" value="Go">
-</form>
-
 <h2>Author Search</h2>
 <p>
 	Enter your forum username to find your mods.
@@ -26,5 +16,32 @@
 	<a href="/blacklist/">Blacklist</a><br />
 	<a href="/verified/">Verified Links</a>
 </p>
+
+<h2>Mods Search</h2>
+<p>
+	Search for mods. <a href="/mods/">All Mods</a>.
+</p>
+
+<form action="/mods/" method="get">
+	<input type="text" name="q" placeholder="Search" value="{{ search }}">
+	<input type="submit" value="Go">
+</form>
+
+<h2>Top ten most downloaded mods</h2>
+
+<ul>
+{% for mod in mods %}
+	<li>
+		<span style="padding-right:10px">{{ forloop.index }})</span>
+		<a href="https://forum.minetest.net/viewtopic.php?t={{ mod.topicId }}">{{ mod.title }}</a> by {{ mod.author }}<br />
+		<p>
+			{{ mod.description | truncate: 100, '…' }}
+		</p>
+		<a href="{{ mod.link }}">Download</a> [{{ mod.downloads }}] |
+		<a href="https://forum.minetest.net/viewtopic.php?t={{ mod.topicId }}">Forum Topic</a> |
+		<a href="/status/?a={{ mod.author }}">{{ mod.author }}'s mods</a>
+	</li>
+{% endfor %}
+</ul>
 
 {% include "footer" %}

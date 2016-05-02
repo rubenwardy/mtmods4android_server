@@ -259,6 +259,11 @@ http.get(url, function(res) {
 			mod.name = basename.toLowerCase();
 			mod.verified = 0;
 
+			// Strip title
+			mod.title = mod.title.replace("[" + mod.name + "]", "")
+				.replace("  ", " ").replace("  ", " ").replace("&#58;", ":")
+				.replace("&#39;", "'").trim()
+
 			var et = url_cachefile[mod.link];
 			if (et) {
 				if (et.status != 200) {
@@ -310,10 +315,12 @@ http.get(url, function(res) {
 						mod[key] = row[key];
 						if (key == "description") {
 							mod.score += 5;
+							mod[key] = mod[key].trim();
 						}
 					}
 				}
 			}
+
 			addSuccess(mod.author, mod);
 
 			ret.push(mod);

@@ -11,5 +11,7 @@
 	"https://github.com/DevynCJohnson/DCJ-Minetest-Mods/",
 	"https://github.com/BlockforgeProject/BlockForge-2-/",
 	"http://repo.or.cz/w/minetest-c55.git/",
-	"http://github.com/DevynCJohnson/DCJ-Minetest-Mods/"
+	"http://github.com/DevynCJohnson/DCJ-Minetest-Mods/",
+	"https://github.com/kaeza/minetest-irc",
+	"https://github.com/ShadowNinja/minetest-irc_commands"
 ]

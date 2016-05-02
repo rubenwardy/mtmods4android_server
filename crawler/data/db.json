@@ -1,72 +1,199 @@
 {
     "sapier/monorail": {
-        "description": "Version 0.0.6\nMonorail mod similar to carts.\n-Ridable cart\n-Transport cart\n-Mesecon integration (optional)\n"
+        "description": "Version 0.0.6\nMonorail mod similar to carts.\n-Ridable cart\n-Transport cart\n-Mesecon integration (optional)\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "racsorhodes/travelpoints": {
-        "description": "Travelpoints 1.4 2015-03-27\n\nSave world specific bookmarks to locations you travel to as \"travelpoints\", then easily teleport to those travelpoints.\n\nYou can also create transporter pads whose destination can be set to an existing travelpoint, no need to ever enter coords by hand.\n\nFor a complete list of available chat commands see readme.txt."
+        "description": "Travelpoints 1.4 2015-03-27\n\nSave world specific bookmarks to locations you travel to as \"travelpoints\", then easily teleport to those travelpoints.\n\nYou can also create transporter pads whose destination can be set to an existing travelpoint, no need to ever enter coords by hand.\n\nFor a complete list of available chat commands see readme.txt.",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "rubenwardy/food": {
         "description": "The largest supporting food mod for Minetest. Adds soups, cakes, bakes and juices.\n"
     },
     "nore/mg": {
-        "description": "This mod changes the default map generation: it changes the way ores are placed, add new biomes and villages.\nNote: do NOT use it in an already generated world!!!"
+        "description": "This mod changes the default map generation: it changes the way ores are placed, add new biomes and villages.\nNote: do NOT use it in an already generated world!!!",
+        "depends": [
+            "default",
+            "farming",
+            "wool",
+            "stairs"
+        ],
+        "soft_depends": [
+            "moretrees"
+        ]
     },
     "rubenwardy/awards": {
         "description": "Adds achievements to Minetest, and an API to register new ones.\n"
     },
     "excalibur zero/brazier": {
-        "description": "This is a mod for Minetest that adds fire braziers.\n"
+        "description": "This is a mod for Minetest that adds fire braziers.\n",
+        "depends": [
+            "fire"
+        ],
+        "soft_depends": []
     },
     "heroofthewinds/lockpicks": {
-        "description": "Adds lockpicks to Minetest and updates most locked objects to be breakable."
+        "description": "Adds lockpicks to Minetest and updates most locked objects to be breakable.",
+        "depends": [
+            "default",
+            "moreores",
+            "doors"
+        ],
+        "soft_depends": [
+            "technic",
+            "locks",
+            "pipeworks",
+            "mesecons"
+        ]
     },
     "evergreen/death_messages": {
-        "description": "A Minetest mod which sends a chat message when a player dies.\n"
+        "description": "A Minetest mod which sends a chat message when a player dies.\n",
+        "depends": [],
+        "soft_depends": []
     },
     "evergreen/quartz": {
-        "description": "Adds quartz ore and some decorative quartz blocks\n"
+        "description": "Adds quartz ore and some decorative quartz blocks\n",
+        "depends": [
+            "default",
+            "stairs"
+        ],
+        "soft_depends": [
+            "moreblocks"
+        ]
     },
     "joz/railcorridors": {
-        "description": "This mod tries to imitate the known rail corridors of Minecraft.\n\nDiese Modifikation versucht die aus Minecraft bekannten Minenschächte mit Schienen nachzubilden.\n"
+        "description": "This mod tries to imitate the known rail corridors of Minecraft.\n\nDiese Modifikation versucht die aus Minecraft bekannten Minenschächte mit Schienen nachzubilden.\n",
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": []
     },
     "excalibur zero/moretechnictools": {
-        "description": "This is a Minetest mod that adds more Technic tools.\n"
+        "description": "This is a Minetest mod that adds more Technic tools.\n",
+        "depends": [
+            "default",
+            "technic",
+            "bucket"
+        ],
+        "soft_depends": [
+            "intllib"
+        ]
     },
     "don/myroofs": {
-        "description": "This is a Minetest mod that adds mesh roofing nodes.\n"
+        "description": "This is a Minetest mod that adds mesh roofing nodes.\n",
+        "depends": [
+            "default",
+            "farming",
+            "dye"
+        ],
+        "soft_depends": [
+            "homedecor"
+        ]
     },
     "vanessae/nixie_tubes": {
-        "description": "This mod provides a set of classic Nixie tubes, and a set of alphanumeric 15-segment tubes similar to Burroughs B-7971, controlled by Mesecons' Digilines mod.\n"
+        "description": "This mod provides a set of classic Nixie tubes, and a set of alphanumeric 15-segment tubes similar to Burroughs B-7971, controlled by Mesecons' Digilines mod.\n",
+        "depends": [
+            "default",
+            "digilines"
+        ],
+        "soft_depends": []
     },
     "bobomb/realterrain": {
-        "description": "A mapgen mod that allows any image to be used as a heightmap. If the image is not grayscale then the red channel is used. A tool is provided to change settings in-game.\n"
+        "description": "A mapgen mod that allows any image to be used as a heightmap. If the image is not grayscale then the red channel is used. A tool is provided to change settings in-game.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "rubenwardy/jump": {
+        "title": "Infinite Jump Challenge",
         "description": "Jump across stilts forever. Completely modifies the gameplay of Minetest.\n"
     },
     "rubenwardy/diet": {
-        "description": "Adds a mechanic to encourage food variety.\n"
+        "description": "Adds a mechanic to encourage food variety.\n",
+        "depends": [],
+        "soft_depends": [
+            "hunger",
+            "default",
+            "animalmaterials",
+            "bucket",
+            "bushes",
+            "bushes_classic",
+            "cooking",
+            "creatures",
+            "docfarming",
+            "dwarves",
+            "ethereal",
+            "farming",
+            "farming_plus",
+            "ferns",
+            "fishing",
+            "fruit",
+            "glooptest",
+            "jkanimals",
+            "jkfarming",
+            "jkwine",
+            "kpgmobs",
+            "mobfcooking",
+            "mobs",
+            "moretrees",
+            "mtfoods",
+            "mush45",
+            "mushroom",
+            "seaplants"
+        ]
     },
     "rubenwardy/vote": {
         "description": "Adds an API to allow players to vote, also adds kick voting.\n"
     },
     "dragonop/claycrafter": {
-        "description": "Craft clay out of compressed dirt.\n"
+        "description": "Craft clay out of compressed dirt.\n",
+        "depends": [
+            "vessels",
+            "default",
+            "bucket"
+        ],
+        "soft_depends": []
     },
     "rubenwardy/chatplus": {
         "description": "Adds chat functions such as ignoring, distance limiting, and swear filtering.\nAlso provides a powerful API, and optionally allows distance limiting.\n"
     },
     "don/cutepie": {
-        "description": "Cute blocks with a happy feel to them.\n"
+        "description": "Cute blocks with a happy feel to them.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "rubenwardy/email": {
-        "description": "Adds email style inboxes to Minetest.\n"
+        "description": "Adds email style inboxes to Minetest.\n",
+        "depends": [],
+        "soft_depends": [
+            "chatplus",
+            "sfinv"
+        ]
     },
     "jp/craftguide": {
         "description": "A simple, flexible and efficient Crafting Guide.\n"
     },
     "chinchow/ethereal": {
-        "description": "Ethereal mod uses the v7 mapgen to add many new biomes to the world."
+        "description": "Ethereal mod uses the v7 mapgen to add many new biomes to the world.",
+        "depends": [
+            "default",
+            "farming",
+            "stairs",
+            "flowers"
+        ],
+        "soft_depends": [
+            "bakedclay"
+        ]
     },
     "sapier/factions": {
         "description": "Version 1.1.5\n\nMod for handling in game factions and reputation\n\n\n"
@@ -78,13 +205,21 @@
         "description": "This is a modpack with 16 mini games. It includes chess, checkers, connect 4, uno and more.\n"
     },
     "don/myitemchest": {
-        "description": "A chest the spawns items when opened.\n"
+        "description": "A chest the spawns items when opened.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "rubenwardy/privilegeareas": {
         "description": "Granting and revoking privileges based on position on the map.\n"
     },
     "kilarin/bridgetool": {
-        "description": "This mod adds a new \"bridge tool\" that makes placing stone (or glass, earth, or any material) while building a bridge in no-fly mode easy.\n"
+        "description": "This mod adds a new \"bridge tool\" that makes placing stone (or glass, earth, or any material) while building a bridge in no-fly mode easy.\n",
+        "depends": [],
+        "soft_depends": [
+            "default"
+        ]
     },
     "yugiohjcj/interaction_areas": {
         "description": "A minetest mod to manage interaction areas.\n"
@@ -93,96 +228,2049 @@
         "description": "Adds chat command aliases.\n"
     },
     "byakuren/global_exchange": {
-        "description": "Adds a server-wide commodities (item) exchange.\n"
+        "description": "Adds a server-wide commodities (item) exchange.\n",
+        "depends": [],
+        "soft_depends": [
+            "default"
+        ]
     },
     "splizard/lifter": {
-        "description": "Simply craft the lift with the following craft recipe:\n\nwood stick wood\nwood mese wood\nwood stick wood\n\nNow place your lift in a shaft or next to a wall. Right click on your lift to get on it and then tap spacebar to go up a level or tap shift to go down a level...\nSo easy!!!\nIf you want to stop the lift at any time, press the \"use\" key.\nNow that you have reached your destination simply walk off the lift :)\n"
+        "description": "Simply craft the lift with the following craft recipe:\n\nwood stick wood\nwood mese wood\nwood stick wood\n\nNow place your lift in a shaft or next to a wall. Right click on your lift to get on it and then tap spacebar to go up a level or tap shift to go down a level...\nSo easy!!!\nIf you want to stop the lift at any time, press the \"use\" key.\nNow that you have reached your destination simply walk off the lift :)\n",
+        "depends": [
+            "default",
+            "doors"
+        ],
+        "soft_depends": []
     },
     "byakuren/loot": {
-        "description": "A loot framework. Also adds loot to dungeons.\n"
+        "description": "A loot framework. Also adds loot to dungeons.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "farming"
+        ]
     },
     "don/mychisel": {
-        "description": "A chisel that allows you to shape blocks.\n\nTo craft a chisel just put a steel ingot and a brown wool in the crafting grid. The steel goes above the wool.\n\nOnce you have your chisel you can set the style by right clicking. \n\nThere are 5 styles to choose from\n- horizontal groove\n- vertical groove\n- cross groves (this matches up with the vertical and horizontal grooves\n- square\n- 4 edges\n\nRight click until you see the style you want in the chat then point at the node and left click.\nEach node can be cut 4 times. Each time you chisel the groove will get a little deeper.\n\nOnly certain nodes can be chiseled. Here are the supported nodes\n\n\n\tCobble\n\tSandstone\n\tClay\n\tCoal Block\n\tStone\n\tDesert Stone\"\n\tWood\n\tAcacia Wood\n\tAspen Wood\n\tPine Wood\n\tDesert Cobble\n\tJungle Wood\n\tSandstone Brick\n\tStone Brick\n\tDesert Stone Brick\n\nLicence - WTFPL\n\nForum - https://forum.minetest.net/viewtopic.php?f=11&t=13104\n"
+        "description": "A chisel that allows you to shape blocks.\n\nTo craft a chisel just put a steel ingot and a brown wool in the crafting grid. The steel goes above the wool.\n\nOnce you have your chisel you can set the style by right clicking. \n\nThere are 5 styles to choose from\n- horizontal groove\n- vertical groove\n- cross groves (this matches up with the vertical and horizontal grooves\n- square\n- 4 edges\n\nRight click until you see the style you want in the chat then point at the node and left click.\nEach node can be cut 4 times. Each time you chisel the groove will get a little deeper.\n\nOnly certain nodes can be chiseled. Here are the supported nodes\n\n\n\tCobble\n\tSandstone\n\tClay\n\tCoal Block\n\tStone\n\tDesert Stone\"\n\tWood\n\tAcacia Wood\n\tAspen Wood\n\tPine Wood\n\tDesert Cobble\n\tJungle Wood\n\tSandstone Brick\n\tStone Brick\n\tDesert Stone Brick\n\nForum - https://forum.minetest.net/viewtopic.php?f=11&t=13104\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "don/mydeck": {
-        "description": "Make realistic looking decks on your house.\n"
+        "description": "Make realistic looking decks on your house.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "don/mypaths": {
-        "description": "Dirt and stone paths.\n"
+        "description": "Dirt and stone paths.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moreblocks",
+            "ethereal"
+        ]
     },
     "rui/playeranim": {
-        "description": "Adds animations to the players' head and right arm.\n"
+        "description": "Adds animations to the players' head and right arm.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "3d_armor"
+        ]
     },
     "sofar/sedimentology-mt": {
-        "description": "A mod that adds realistic erosion and degradation of rocks.\n"
+        "description": "A mod that adds realistic erosion and degradation of rocks.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "jp/spectator_mode": {
-        "description": "A mod for Minetest allowing you to watch other players in their 3rd person view.\nYou're invisible and undetectable for the players when you're in this mode.\n"
+        "description": "A mod for Minetest allowing you to watch other players in their 3rd person view.\nYou're invisible and undetectable for the players when you're in this mode.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "jp/workbench": {
-        "description": "A mod adding a Work Bench for Minetest.\n"
+        "description": "A mod adding a Work Bench for Minetest.\n",
+        "depends": [
+            "default",
+            "stairs"
+        ],
+        "soft_depends": [
+            "xdecor"
+        ]
     },
     "byakuren/multiblock": {
-        "description": "A library for matching block structures.\n"
+        "description": "A library for matching block structures.\n",
+        "depends": [],
+        "soft_depends": [
+            "default"
+        ]
     },
     "tenplus1/farming": {
-        "description": "Adds many plants and food to Minetest"
+        "description": "Adds many plants and food to Minetest",
+        "depends": [
+            "default",
+            "wool"
+        ],
+        "soft_depends": []
     },
     "tenplus1/mobs": {
-        "description": "Adds many farm animals, wild animals and monsters."
+        "description": "Adds a mob api for mods to add animals or monsters etc.",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "don/mycorners": {
-        "description": "Put decorative corners on blocks.\n\nmycorners makes it so you can add  corners on blocks like the corners of castles and houses. \n\nJust build a machine and make your cornerboards. You can add the corners to blocks in the machine or use the hammer to set them.\n\nYou will have beautiful buildings in no time.\n"
+        "description": "Put decorative corners on blocks.\n\nmycorners makes it so you can add  corners on blocks like the corners of castles and houses. \n\nJust build a machine and make your cornerboards. You can add the corners to blocks in the machine or use the hammer to set them.\n\nYou will have beautiful buildings in no time.\n",
+        "depends": [
+            "default",
+            "dye"
+        ],
+        "soft_depends": []
     },
     "don/mywoodslopes": {
-        "description": "Make slopes with wood blocks.\n"
+        "description": "Make slopes with wood blocks.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moretrees",
+            "ethereal"
+        ]
     },
     "evergreen/trash_can": {
-        "description": "This mod adds a wooden trash can, and a dumpster to the game.  Right click it, put in your trash, and click the empty trash button.\n"
+        "description": "This mod adds a wooden trash can, and a dumpster to the game.  Right click it, put in your trash, and click the empty trash button.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "stu/wield3d": {
-        "description": "Visible 3d wielded items for Minetest.\nAdds 3d wield-items that are visible in third person view and to other players.\n"
+        "description": "Visible 3d wielded items for Minetest.\nAdds 3d wield-items that are visible in third person view and to other players.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "byakuren/monoidal_effects": {
         "description": "monoidal_effects is a framework for player status effects and state that allows\nmultiple effects to affect the same state at once.\n"
     },
     "byakuren/armor_monoid": {
-        "description": "A monoidal_effects monoid for armor\n"
+        "description": "A monoidal_effects monoid for armor\n",
+        "depends": [
+            "monoidal_effects"
+        ],
+        "soft_depends": [
+            "3d_armor"
+        ]
     },
     "don/mydoors": {
         "description": "Several different style doors.\n"
     },
     "sofar/crops": {
-        "description": "This mod expands the basic set of farming-related crops that minetest_game offers. It adds melons, potatoes, tomatoes, green beans and corn. The mod also implements plant humidity - you will have to water plants to make sure they're not dried out, or make sure they don't get over-watered.\n\nMod specific settings can be changed in the \"crops_settings.txt\" file in the world folder.\n\nFor more information, go to: http://goo.gl/wf0XLh\n"
+        "description": "This mod expands the basic set of farming-related crops that minetest_game offers. It adds melons, potatoes, tomatoes, green beans and corn. The mod also implements plant humidity - you will have to water plants to make sure they're not dried out, or make sure they don't get over-watered.\n\nMod specific settings can be changed in the \"crops_settings.txt\" file in the world folder.\n\nFor more information, go to: http://goo.gl/wf0XLh\n",
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": []
     },
     "jp/enchanting": {
-        "description": "A mod adding a Minecraft-inspired Enchantment Table to Minetest.\n"
+        "description": "A mod adding a Minecraft-inspired Enchantment Table to Minetest.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "3d_armor",
+            "xdecor"
+        ]
     },
     "jp/realchess": {
-        "description": "Play a life-like chess game (formspec-based).\n"
+        "description": "Play a life-like chess game (formspec-based).\n",
+        "depends": [
+            "default",
+            "stairs",
+            "dye"
+        ],
+        "soft_depends": []
     },
     "rubenwardy/report": {
-        "description": "Allows players to report misconduct or bugs using /report.\n"
+        "description": "Allows players to report misconduct or bugs using /report.\n",
+        "depends": [
+            "email"
+        ],
+        "soft_depends": []
     },
     "sakel/spawners": {
-        "description": "This mod adds several creatures to Minetest, including zombies, ghosts, and sheep.\n"
+        "description": "This mod adds several creatures to Minetest, including zombies, ghosts, and sheep.\n",
+        "depends": [
+            "default",
+            "wool"
+        ],
+        "soft_depends": []
     },
     "heroofthewinds/caverealms": {
-        "description": "A mod for Minetest to add underground realms.\n"
+        "description": "A mod for Minetest to add underground realms.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "philipbenr/castles": {
-        "description": "This is a mod all about creating castles and castle dungeons. Many of the nodes are used for the outer-walls or dungeons.\n"
+        "description": "This is a mod all about creating castles and castle dungeons. Many of the nodes are used for the outer-walls or dungeons.\n",
+        "depends": [
+            "default",
+            "stairs",
+            "doors",
+            "farming"
+        ],
+        "soft_depends": [
+            "building_blocks",
+            "asphalt",
+            "streets",
+            "moreblocks"
+        ]
     },
     "stu/minetest-3d_armor": {
         "description": "Visible player armor & wielded items.\n"
     },
     "stu/shooter": {
-        "description": "First person shooter mod.\nAdds firearms plus a few other fun items.\n"
+        "description": "First person shooter mod.\nAdds firearms plus a few other fun items.\n",
+        "depends": [
+            "default",
+            "dye",
+            "tnt",
+            "wool"
+        ],
+        "soft_depends": [
+            "mobs"
+        ]
     },
     "sofar/torches": {
-        "description": "Mesh-based torches - three dimensional torches for minetest.\n"
+        "description": "Mesh-based torches - three dimensional torches for minetest.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "napiophelios/alignedbricks": {
-        "description": "This mod aligns all sides of default brick nodes\nto maintain a continuous staggered pattern\nfrom all points of view.\n"
+        "description": "This mod aligns all sides of default brick nodes\nto maintain a continuous staggered pattern\nfrom all points of view.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "pilzadam/nether": {
+        "description": "Adds a deep underground realm with different mapgen that you can reach with obsidian portals.\n",
+        "depends": [
+            "stairs",
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "vanessae/biome_lib": {
+        "description": "The biome spawning and management library for Plantlife, Moretrees, Tiny Trees, and other mods that originally depended on plants_lib from the plantlife modpack.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "intllib"
+        ]
+    },
+    "vanessae/coloredwood": {
+        "description": "This mod provides a multitude of colors of wood, sticks, and fences to Minetest, as per the palette outlined by my Unified Dyes mod.\n",
+        "depends": [
+            "default",
+            "unifieddyes"
+        ],
+        "soft_depends": [
+            "moreblocks"
+        ]
+    },
+    "vanessae/gloopblocks": {
+        "description": "Adds decorative and functional blocks, including cement, rainbow blocks, \"evil\" blocks and sticks, \nand the usual collection of tools of various strengths and speeds made from either cement or \"evil\" components.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moreblocks",
+            "stairs",
+            "glooptest",
+            "gloopores",
+            "building_blocks",
+            "intllib",
+            "wool",
+            "xdecor",
+            "caverealms"
+        ]
+    },
+    "vanessae/ilights": {
+        "description": "Adds various lights.\n",
+        "depends": [
+            "default",
+            "dye"
+        ],
+        "soft_depends": [
+            "intllib"
+        ]
+    },
+    "calinou/maptools": {
+        "description": "Adds various special versions of normal blocks, tools, and other map maintainer tools.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "jeija/minetest-mod-digilines": {
+        "description": "This mod adds digiline wires, an RTC (Real Time Clock), a light sensor as well as an LCD Screen. Can be used together with the luacontroller from mesecons.\n"
+    },
+    "calinou/moreblocks": {
+        "description": "Adds various miscellaneous blocks to the game.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "intllib"
+        ]
+    },
+    "vanessae/moretrees": {
+        "description": "This mod adds a whole bunch of new types of trees to the game\n",
+        "depends": [
+            "default",
+            "biome_lib"
+        ],
+        "soft_depends": [
+            "stairs",
+            "moreblocks",
+            "intllib"
+        ]
+    },
+    "megaf/more_chests": {
+        "description": "Adds several chests that behave differently, and can be used to donate items, share items, hide chests, make secret chests, and more.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "calinou/moreores": {
+        "description": "Adds new Ore types.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "mg"
+        ]
+    },
+    "don/mymillwork": {
+        "description": "Crown molding, columns and baseboards of different styles.\n\n\n\nIf you want to add or remove a texture simply edit the table at the top of millwork.lua file.\n\nRight now I have these textures: White, Sandstone, Desert Sand and Clay. The others are commented out. \n\nEach texture has 28 nodes so careful that you don't add too many textures.\n\n\n\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "vanessae/pipeworks": {
+        "description": "This mod uses nodeboxes to supply a complete set of 3D pipes and tubes, along devices that work with them.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "mesecons",
+            "mesecons_mvps"
+        ]
+    },
+    "vanessae/signs_lib": {
+        "description": "Adds signs with readable text.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "intllib",
+            "screwdriver",
+            "keyword_interact"
+        ]
+    },
+    "vanessae/unifieddyes": {
+        "description": "Unified Dyes expands the standard dye set from 15 to 90 colors.\n",
+        "depends": [
+            "default",
+            "dye"
+        ],
+        "soft_depends": [
+            "intllib"
+        ]
+    },
+    "lag01/chat_anticurse": {
+        "description": "Kick player out when he type curse word in chat or using /me or /msg command. Checks for some English and Russian curse words.\n",
+        "depends": [],
+        "soft_depends": [
+            "default"
+        ]
+    },
+    "lag01/chat2": {
+        "description": "Complements game built-in chat or replaces it.\n",
+        "depends": [],
+        "soft_depends": [
+            "chat_anticurse"
+        ]
+    },
+    "fz72/fancy_elevator": {
+        "description": "Adds Elevators to minetest.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "excalibur zero/fireballs": {
+        "description": "This is a mod for Minetest that adds fireballs, among other things.\n",
+        "depends": [
+            "fire"
+        ],
+        "soft_depends": []
+    },
+    "enke/inlaid": {
+        "description": "This mod adds mineral textures onto nodes. Currently in version 1.4.1\nYou can inform me of bugs by creating an issue in github. https://github.com/NANOsoldierEnke/inlaid",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "lag01/spawn_command": {
+        "description": "Adds a /spawn command that telepors you to the server spawn command.\n"
+    },
+    "don/batmod": {
+        "description": "This mod adds a lot of nodes that are Batman like.\n\nThe color theme is black and yellow. There are many things such as building blocks, lights, doors and more.\n"
+    },
+    "sanchez/blox": {
+        "description": "Adds lots of differently colored and textured blocks to Minetest.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "rubenwardy/food_sweet": {
+        "description": "Adds cakes, buns and tarts. Expansion pack for the food mod.\n",
+        "depends": [
+            "food"
+        ],
+        "soft_depends": [
+            "farming_plus",
+            "plantlib",
+            "bushes_classic",
+            "bushes"
+        ]
+    },
+    "don/mysheetmetal": {
+        "description": "Gutters, fashia and soffit makes your house look great.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "don/mymulch": {
+        "description": "Turn leaves,sticks and more into mulch. \n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "don/mysponge": {
+        "description": "Soak up water with a sponge.\n"
+    },
+    "dragonop/tools_obsidian": {
+        "description": "Adds obsidian dagger, sword, and longsword.\n",
+        "depends": [
+            "default",
+            "bucket"
+        ],
+        "soft_depends": []
+    },
+    "don/worldedge": {
+        "description": "Allows you to limit the size of your world.\n",
+        "depends": [],
+        "soft_depends": []
+    },
+    "mtango688/caches": {
+        "description": "This mod adds containers for Technic that store a single type of item in large amounts. The containers are simple, portable, and upgradeable.\n",
+        "depends": [
+            "default",
+            "moreores",
+            "technic",
+            "pipeworks"
+        ],
+        "soft_depends": []
+    },
+    "srifqi/advancedban": {
+        "depends": [],
+        "soft_depends": []
+    },
+    "krock/bamboo": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moreblocks"
+        ]
+    },
+    "paramat/archipelago": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/asteroid": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "tenplus1/bakedclay": {
+        "depends": [
+            "default",
+            "stairs"
+        ],
+        "soft_depends": []
+    },
+    "srifqi/amgmt": {
+        "depends": [
+            "default",
+            "flowers"
+        ],
+        "soft_depends": [
+            "bakedclay"
+        ]
+    },
+    "pilzadam/beds": {
+        "depends": [
+            "default",
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "srifqi/banondie": {
+        "depends": [],
+        "soft_depends": [
+            "advancedban"
+        ]
+    },
+    "krock/boost_cart": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "mesecons",
+            "moreores"
+        ]
+    },
+    "blockmen/beds": {
+        "depends": [
+            "default",
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "krock/bitchange": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moreores",
+            "technic_worldgen",
+            "quartz",
+            "pipeworks",
+            "money",
+            "money2",
+            "currency"
+        ]
+    },
+    "calinou/carbone_mobs": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "calinou/carbone_torches": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "tenplus1/cblocks": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "srifqi/carpet3d": {
+        "depends": [
+            "default",
+            "wool",
+            "flowers"
+        ],
+        "soft_depends": [
+            "moretrees"
+        ]
+    },
+    "paramat/canyon": {
+        "depends": [
+            "default",
+            "bucket"
+        ],
+        "soft_depends": []
+    },
+    "paramat/catacomb": {
+        "depends": [
+            "default",
+            "stairs"
+        ],
+        "soft_depends": []
+    },
+    "pilzadam/carts": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "traxie21/creativechanger": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "bas080/dualport": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "sokomine/cottages": {
+        "depends": [
+            "farming"
+        ],
+        "soft_depends": [
+            "default",
+            "stairs",
+            "homedecor",
+            "intllib",
+            "trees",
+            "wool",
+            "moreblocks"
+        ]
+    },
+    "sokomine/colormachine": {
+        "depends": [
+            "dye"
+        ],
+        "soft_depends": [
+            "default",
+            "unifieddyes",
+            "coloredwood",
+            "unifiedbricks",
+            "stained_glass",
+            "cotton",
+            "wool",
+            "flags",
+            "blox",
+            "homedecor",
+            "plasticbox",
+            "kerova",
+            "hardenedclay",
+            "clstone",
+            "colorcubes",
+            "colouredstonebricks",
+            "lavalamp",
+            "myroofs",
+            "mydeck",
+            "mycorners",
+            "mymulch",
+            "clothing",
+            "cblocks"
+        ]
+    },
+    "bas080/falling_items": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "bas080/flags": {
+        "depends": [
+            "default",
+            "wool",
+            "unifieddyes"
+        ],
+        "soft_depends": []
+    },
+    "bas080/firestone": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "pilzadam/farming_plus": {
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": [
+            "intllib"
+        ]
+    },
+    "paramat/flexrealm": {
+        "depends": [
+            "default",
+            "flowers"
+        ],
+        "soft_depends": []
+    },
+    "paramat/floatindev": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/flolands": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "casimir/gemalde": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/fracture": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/highlandpools": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "megaf/green_screen": {
+        "depends": [
+            "default",
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "blockmen/gate": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "stu/hovercraft": {
+        "depends": [
+            "default",
+            "wool",
+            "dye"
+        ],
+        "soft_depends": []
+    },
+    "bas080/inbox": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "blockmen/invtweak": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "3d_armor",
+            "unified_inventory"
+        ]
+    },
+    "paramat/intersecting": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "shadowninja/irc_commands": {
+        "depends": [
+            "irc"
+        ],
+        "soft_depends": []
+    },
+    "paramat/levels": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/landup": {
+        "depends": [
+            "default",
+            "stairs"
+        ],
+        "soft_depends": []
+    },
+    "blockmen/landscape": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "hybrid dog/lavacooling": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "realbadangel/mese_crystals": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/meru": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/meseor": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "krock/materials": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moreblocks",
+            "technic_worldgen",
+            "concrete",
+            "moreores"
+        ]
+    },
+    "sokomine/locks": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "pipeworks"
+        ]
+    },
+    "tenplus1/lucky_block": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "farming",
+            "mobs",
+            "ethereal",
+            "bakedclay",
+            "pie",
+            "paintings",
+            "carpet",
+            "3d_armor"
+        ]
+    },
+    "sokomine/locked_travelnet": {
+        "depends": [
+            "locks",
+            "travelnet"
+        ],
+        "soft_depends": []
+    },
+    "paramat/mesecar": {
+        "depends": [
+            "default",
+            "wool",
+            "dye"
+        ],
+        "soft_depends": []
+    },
+    "sokomine/markers": {
+        "depends": [
+            "areas"
+        ],
+        "soft_depends": []
+    },
+    "philipbenr/mtfoods": {
+        "depends": [
+            "default",
+            "farming",
+            "vessels"
+        ],
+        "soft_depends": [
+            "mobs",
+            "farming_plus",
+            "flowers"
+        ]
+    },
+    "sokomine/mobf_trader": {
+        "depends": [],
+        "soft_depends": [
+            "mobs",
+            "lottmobs",
+            "3d_armor"
+        ]
+    },
+    "stu/meshnode": {
+        "depends": [],
+        "soft_depends": []
+    },
+    "pilzadam/mobs": {
+        "depends": [
+            "default",
+            "fire"
+        ],
+        "soft_depends": []
+    },
+    "krock/mining_plus": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "unified_inventory",
+            "pipeworks",
+            "bitchange"
+        ]
+    },
+    "evergreen/minetest_tweaks": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/moonrealm": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "bas080/mtpaint": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/noise23": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "don/mypaint": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "mypaint"
+        ]
+    },
+    "paramat/noisegrid": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "don/mymineshaft": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/multigrav": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "krock/noisetest": {
+        "depends": [
+            "default",
+            "flowers"
+        ],
+        "soft_depends": []
+    },
+    "paramat/paragen": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "shadowninja/nuke": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/path": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "krock/paint_roller": {
+        "depends": [
+            "wool"
+        ],
+        "soft_depends": [
+            "coloredwood"
+        ]
+    },
+    "paramat/paragenv7": {
+        "depends": [
+            "default",
+            "flowers"
+        ],
+        "soft_depends": []
+    },
+    "paramat/nysauto": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/overgen": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/pathv6alt": {
+        "depends": [
+            "default",
+            "stairs"
+        ],
+        "soft_depends": []
+    },
+    "krock/player_notes": {
+        "depends": [],
+        "soft_depends": []
+    },
+    "tenplus1/protector": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "doors",
+            "mobs"
+        ]
+    },
+    "paramat/projects": {
+        "depends": [
+            "default",
+            "stairs"
+        ],
+        "soft_depends": []
+    },
+    "casimir/paths": {
+        "depends": [],
+        "soft_depends": []
+    },
+    "bas080/plants": {
+        "depends": [
+            "default",
+            "habitat"
+        ],
+        "soft_depends": [
+            "farming"
+        ]
+    },
+    "tenplus1/pie": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "hunger",
+            "hbhunger",
+            "farming",
+            "mobs",
+            "ethereal"
+        ]
+    },
+    "pilzadam/player_textures": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "blockmen/pyramids": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "hybrid dog/riesenpilz": {
+        "depends": [
+            "default",
+            "vector_extras"
+        ],
+        "soft_depends": [
+            "digilines",
+            "fence_registration",
+            "technic"
+        ]
+    },
+    "paramat/rainforest": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "sokomine/replacer": {
+        "depends": [],
+        "soft_depends": [
+            "default",
+            "dye"
+        ]
+    },
+    "paramat/riverdev": {
+        "depends": [
+            "default",
+            "stairs",
+            "bucket"
+        ],
+        "soft_depends": []
+    },
+    "paramat/rain": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "pilzadam/signs": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "sokomine/skyplatform": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "tenplus1/simple_skins": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "inventory_plus",
+            "3d_armor"
+        ]
+    },
+    "paramat/snowdrift": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/slabrealm": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "splizard/snow": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "flowers",
+            "moreblocks"
+        ]
+    },
+    "krock/simple_protection": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "kaeza/soccer": {
+        "depends": [
+            "default",
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "gunshippenguin/sprint": {
+        "depends": [],
+        "soft_depends": [
+            "hudbars"
+        ]
+    },
+    "paramat/stability": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "paramat/spacesuit": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "casimir/stairsplus": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "srifqi/superflat": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "casimir/stoneage": {
+        "depends": [
+            "default",
+            "fire"
+        ],
+        "soft_depends": [
+            "moretrees",
+            "conifers"
+        ]
+    },
+    "paramat/subterrain": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "pilzadam/tnt": {
+        "depends": [
+            "default",
+            "fire"
+        ],
+        "soft_depends": []
+    },
+    "pilzadam/throwing": {
+        "depends": [
+            "default",
+            "bucket",
+            "fire",
+            "farming"
+        ],
+        "soft_depends": []
+    },
+    "blockmen/torches": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "tenplus1/teleport_potion": {
+        "depends": [
+            "default",
+            "vessels"
+        ],
+        "soft_depends": []
+    },
+    "paramat/trail": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "hybrid dog/trashcan": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "rubenwardy/traps": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "hybrid dog/treecapitator": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "nyanland",
+            "farming_plus",
+            "moretrees"
+        ]
+    },
+    "bas080/trees": {
+        "depends": [
+            "default",
+            "biome_lib"
+        ],
+        "soft_depends": []
+    },
+    "vanessae/unified_inventory": {
+        "depends": [],
+        "soft_depends": [
+            "creative",
+            "intllib",
+            "datastorage"
+        ]
+    },
+    "paramat/watershed": {
+        "depends": [
+            "default",
+            "bucket",
+            "stairs"
+        ],
+        "soft_depends": []
+    },
+    "paramat/watershedminimal": {
+        "depends": [
+            "default",
+            "bucket"
+        ],
+        "soft_depends": []
+    },
+    "paramat/webworld": {
+        "depends": [
+            "default",
+            "stairs"
+        ],
+        "soft_depends": []
+    },
+    "casimir/vortoj": {
+        "depends": [],
+        "soft_depends": [
+            "3dforniture",
+            "3d_torch",
+            "beds",
+            "boats",
+            "bones",
+            "bucket",
+            "carts",
+            "default",
+            "doors",
+            "dye",
+            "farming",
+            "fire",
+            "flowers",
+            "nodetest",
+            "pots",
+            "screwdriver",
+            "stairs",
+            "tnt",
+            "vessels",
+            "wool",
+            "xpanes"
+        ]
+    },
+    "bas080/vines": {
+        "depends": [
+            "default",
+            "biome_lib"
+        ],
+        "soft_depends": [
+            "moretrees"
+        ]
+    },
+    "paramat/volcano": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "tenplus1/wine": {
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": []
+    },
+    "krock/yappy": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "flowers"
+        ]
+    },
+    "jp/xdecor": {
+        "depends": [
+            "default",
+            "bucket",
+            "doors",
+            "stairs",
+            "xpanes"
+        ],
+        "soft_depends": [
+            "3d_armor",
+            "fire",
+            "oresplus"
+        ]
+    },
+    "kahrl/away": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "bobomb/automata": {
+        "depends": [],
+        "soft_depends": [
+            "mp_worldedit"
+        ]
+    },
+    "craigydavi/bacon": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "rui/bonemeal": {
+        "depends": [
+            "default",
+            "dye",
+            "flowers"
+        ],
+        "soft_depends": [
+            "charcoal"
+        ]
+    },
+    "rabbibob/bobblocks": {
+        "depends": [
+            "default",
+            "mesecons"
+        ],
+        "soft_depends": []
+    },
+    "napiophelios/basic_bow": {
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": [
+            "creatures",
+            "creeper",
+            "kpgmobs",
+            "mobs",
+            "mobs_goblins",
+            "ninja",
+            "pmobs",
+            "pyramids",
+            "zombie"
+        ]
+    },
+    "maikerumine/badplayer": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "napiophelios/campfire": {
+        "depends": [
+            "default",
+            "fire",
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "doc/campfire": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "ben/bewarethedark": {
+        "depends": [],
+        "soft_depends": [
+            "hud",
+            "hudbars"
+        ]
+    },
+    "minermoder27/buildtest": {
+        "depends": [
+            "mesecons",
+            "str_helpers"
+        ],
+        "soft_depends": []
+    },
+    "torusjkl/charcoal": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "craigydavi/colouredstonebricks": {
+        "depends": [
+            "default",
+            "dye"
+        ],
+        "soft_depends": [
+            "stairsplus"
+        ]
+    },
+    "slemon/chain_transfer": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "glünggi/columnia": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moretrees"
+        ]
+    },
+    "mastergollum/darkage": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "kilarin/compassgps": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "intllib"
+        ]
+    },
+    "maikerumine/esmobs": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "inventory_plus",
+            "farming",
+            "bones",
+            "intllib",
+            "es"
+        ]
+    },
+    "jojoa1997/display_blocks": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "technic"
+        ]
+    },
+    "crazyginger72/fireworks": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "raphael/fakeblocks": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "wowiamdiamonds/gems": {
+        "depends": [
+            "default",
+            "moreores"
+        ],
+        "soft_depends": []
+    },
+    "mossmanikin/fishing": {
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": []
+    },
+    "kalabasa/furnace_time": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "minermoder27/fertiliser": {
+        "depends": [
+            "default",
+            "farming",
+            "farming_plus"
+        ],
+        "soft_depends": [
+            "plants_lib",
+            "moretrees"
+        ]
+    },
+    "martian/hiking": {
+        "depends": [
+            "default",
+            "dye"
+        ],
+        "soft_depends": []
+    },
+    "qwrwed/grassblock": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "thefamilygrog66/heads": {
+        "depends": [
+            "bones"
+        ],
+        "soft_depends": []
+    },
+    "amaz/interact": {
+        "depends": [],
+        "soft_depends": []
+    },
+    "raphael/industrial": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "mtmodder148/hydroponics": {
+        "depends": [
+            "default",
+            "dye"
+        ],
+        "soft_depends": [
+            "mesecons",
+            "pipeworks"
+        ]
+    },
+    "excalibur zero/glowblocks": {
+        "depends": [
+            "dye",
+            "mesecons"
+        ],
+        "soft_depends": []
+    },
+    "minermoder27/honeypots": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "napiophelios/lapis": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "stairs"
+        ]
+    },
+    "minearriatest/jungletools": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "technic"
+        ]
+    },
+    "sirken/laser_mod": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "3d_armor"
+        ]
+    },
+    "lag01/kick_voting": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "cryterion/lavacooling": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moreores",
+            "technic"
+        ]
+    },
+    "pagliaccio/laser_mod": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "dgm5555/mapit": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "unified_inventory",
+            "travelpoints"
+        ]
+    },
+    "qwrwed/lightsplus": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "jonjeg/localisation": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "thefamilygrog66/lrfurn": {
+        "depends": [
+            "default",
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "thefamilygrog66/magicbeans": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "jaandrle/meseingravel": {
+        "depends": [
+            "default",
+            "bucket"
+        ],
+        "soft_depends": []
+    },
+    "thefamilygrog66/mccarball": {
+        "depends": [
+            "default",
+            "mobs"
+        ],
+        "soft_depends": []
+    },
+    "heroofthewinds/mobspawn": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "mobs",
+            "carbone_mobs",
+            "mobf",
+            "creatures",
+            "zmobs",
+            "senderman",
+            "kpgmobs",
+            "ccmobs",
+            "spidermob"
+        ]
+    },
+    "drkwv/minetest_hardcorebrix": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "thefamilygrog66/maze": {
+        "depends": [
+            "default",
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "mitroman/moreslabs": {
+        "depends": [
+            "wool",
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "npx/nssb": {
+        "depends": [
+            "nssm",
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "mitroman/pie": {
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": []
+    },
+    "vitaminx/pizza": {
+        "depends": [
+            "default",
+            "farming",
+            "moreblocks"
+        ],
+        "soft_depends": []
+    },
+    "jojoa1997/peaceful_npc": {
+        "depends": [
+            "default",
+            "biome_lib"
+        ],
+        "soft_depends": []
+    },
+    "nemin32/nnt": {
+        "depends": [
+            "default",
+            "domb"
+        ],
+        "soft_depends": []
+    },
+    "desvox/orewood": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "qwertymine3/planetoids": {
+        "depends": [
+            "default",
+            "flowers"
+        ],
+        "soft_depends": []
+    },
+    "npx/nssm": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "prestidigitator/prestibags": {
+        "depends": [],
+        "soft_depends": []
+    },
+    "tetpaaka/quests": {
+        "depends": [],
+        "soft_depends": [
+            "intllib",
+            "unified_inventory",
+            "inventory_plus",
+            "central_message"
+        ]
+    },
+    "pandaro/player_radar": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "cheapie/plasticbox": {
+        "depends": [
+            "homedecor"
+        ],
+        "soft_depends": [
+            "technic",
+            "bucket",
+            "pipeworks"
+        ]
+    },
+    "kingsmarty/rainbow_ore": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "3d_armor",
+            "shields"
+        ]
+    },
+    "qwrwed/plasmascreen": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "hiradur/player_hash_skins": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "khonkhortisan/rubiks": {
+        "depends": [
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "redyeti/replicator": {
+        "depends": [
+            "default",
+            "mesecons",
+            "pipeworks"
+        ],
+        "soft_depends": []
+    },
+    "slemon/roomgen": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "argos/rotate": {
+        "depends": [],
+        "soft_depends": [
+            "default"
+        ]
+    },
+    "4aiman/shared_autoban": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "amadin/sethome": {
+        "depends": [
+            "beds"
+        ],
+        "soft_depends": []
+    },
+    "indriapollo/simple_warp": {
+        "depends": [],
+        "soft_depends": []
+    },
+    "delaroyas/simplyslopes": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "lapis",
+            "bakedclay",
+            "wool",
+            "mobs",
+            "castle",
+            "homedecor",
+            "moretrees",
+            "ethereal",
+            "xanadu"
+        ]
+    },
+    "cx384/special_picks": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "thefamilygrog66/spawneggs": {
+        "depends": [
+            "default",
+            "mobs",
+            "wool"
+        ],
+        "soft_depends": []
+    },
+    "indriapollo/spleef": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "heroofthewinds/skylands": {
+        "depends": [
+            "default",
+            "fire",
+            "stairs"
+        ],
+        "soft_depends": [
+            "mesecons",
+            "moreblocks",
+            "moreores",
+            "technic"
+        ]
+    },
+    "brandonreese/stairpick": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "doyousketch2/stained_glass": {
+        "depends": [
+            "default",
+            "moreblocks",
+            "unifieddyes"
+        ],
+        "soft_depends": []
+    },
+    "ashenk69/specialties": {
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": []
+    },
+    "everamzah/superpick": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "protector",
+            "tnt",
+            "bones"
+        ]
+    },
+    "ben/sunburn": {
+        "depends": [],
+        "soft_depends": [
+            "hud",
+            "hudbars"
+        ]
+    },
+    "thefamilygrog66/treasurechest": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "mtmodder148/unifiedwool": {
+        "depends": [
+            "dye\nwool\nunifieddyes"
+        ],
+        "soft_depends": []
+    },
+    "indriapollo/thecube": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "lag01/teleports": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "general3214/useless_mod": {
+        "depends": [
+            "default\nbones\nwool"
+        ],
+        "soft_depends": []
+    },
+    "wowiamdiamonds/unifiedbricks": {
+        "depends": [
+            "default\nbucket\nunifieddyes\nvessels"
+        ],
+        "soft_depends": []
+    },
+    "raphael/various": {
+        "depends": [
+            "default\nflowers\nmoreores\ncraft_guide"
+        ],
+        "soft_depends": []
+    },
+    "electricsolstice/voltbuild": {
+        "depends": [],
+        "soft_depends": [
+            "default\nmesecons\nbucket"
+        ]
     }
 }

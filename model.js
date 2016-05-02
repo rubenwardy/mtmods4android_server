@@ -28,6 +28,38 @@ function getList()
     return res;
 }
 
+function getPopularMods()
+{
+	var res = JSON.parse(fs.readFileSync("crawler/out/list.json", 'utf8'));
+	var lookup = {};
+	for (var i = 0; i < res.length; i++) {
+		var mod = res[i];
+		mod.downloads = 0;
+		lookup[mod.author + "/" + mod.name] = mod;
+	}
+
+	var lines = fs.readFileSync("downloads.txt", 'utf8').split("\n");
+	for (var i = 0; i < lines.length; i++) {
+		var parts = lines[i].split("\t");
+		if (parts.length > 4 && parts[0] == "200") {
+			var author = parts[2];
+			var modname = parts[3];
+			var mod = lookup[author + "/" + modname];
+			if (mod) {
+				mod.downloads++;
+			} else {
+				console.log("Mod " + author + "/" + modname + " not found in list.json! (Model.getPopularMods)")
+			}
+		}
+	}
+
+	res.sort(function(a,b) {
+		return (a.downloads < b.downloads) ? 1 : ((b.downloads < a.downloads) ? -1 : 0);
+	});
+
+	return res.splice(0, 10);
+}
+
 var accepted_types = ["mal", "dw", "other"];
 function validateReport(res) {
     return res.author && res.modname && res.list &&
@@ -55,6 +87,7 @@ function report(res) {
 module.exports = {
 	report: report,
 	getList: getList,
+	getPopularMods: getPopularMods,
 	getReports: function() {
 		return reports;
 	},

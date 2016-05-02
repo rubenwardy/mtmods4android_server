@@ -11,112 +11,62 @@ if (!String.prototype.format) {
 }
 
 var fs = require('fs');
-var http = require("https");
+var filefetch = require("./filefetch");
 var settings = JSON.parse(fs.readFileSync("settings.json", 'utf8'));
 var list = JSON.parse(fs.readFileSync(settings.listfile, 'utf8'));
 var db = JSON.parse(fs.readFileSync("data/db.json", 'utf8'));
-var token = settings.github_auth;
 var running = 0;
 
-function runOn(item) {
+function propertyFromFile(item, file, property, success) {
 	var id = item.author.toLowerCase() + "/" + item.name.toLowerCase();
-	if (db[id]) {
-		console.log("Skipping " + id);
-		return;
-	}
-	//console.log("Starting " + id);
+	//if (db[id] && db[id][property]) {
+	//	return false;
+	//}
 
-	function findTwo(link, re) {
-		if (!re) {
-			console.log("failed to compile");
-			return null, null;
-		}
-		var m = re.exec(link);
-		if (m) {
-			return [m[1], m[2]];
-		}
-		return [null, null]
-	}
-
-	var filters = [
-		{re: /github.com\/([\w-]+)\/([\w-]+)/g,    out: "/repos/{0}/{1}/contents/description.txt"} //"https://raw.githubusercontent.com/{0}/{1}/master/description.txt"},
-		//	{re: /bitbucket.org\/([\w-]+)\/([\w-]+)/g, out: "https://bitbucket.org/{0}/{1}/raw/18449ee6b6db4e650e3554d2c81164d1ab243058/description.txt"},
-	];
-
-	for (var j = 0; j < filters.length; j++) {
-		var fil = filters[j];
-		var ret = findTwo(item.link, fil.re);
-		var author = ret[0];
-		var repo = ret[1];
-		if (author && repo) {
-			running++;
-			var url = fil.out.format(author, repo);
-
-			http.get({
-			    host: 'api.github.com',
-			    path: url,
-			    method: 'GET',
-			    headers: {'user-agent': 'node.js', 'Authorization': "Bearer " + token},
-			}, function(res) {
-				if (res.statusCode !== 200) {
-					running--;
-					console.log(author + "/" + repo + ": " + res.statusCode);
-
-					var body = '';
-					res.on('data', function(chunk) {
-						body += chunk;
-					});
-
-					res.on('end', function() {
-						console.log(author + "/" + repo + ": " + res.statusCode + ": " + body);
-					});
-
-					return;
-				}
-
-				var body = '';
-
-				res.on('data', function(chunk) {
-					body += chunk;
-				});
-
-				res.on('end', function() {
-					var id = item.author.toLowerCase() + "/" + item.name.toLowerCase();
-
-					running--;
-					if (body.trim() == "") {
-						console.log("Empty result from " + id);
-						return;
-					}
-
-					var data = JSON.parse(body);
-					console.log("Got " + item.name + ": '" + body + "'");
-					if (!data || data.message == "Not Found") {
-						console.log("Empty result from " + id);
-						return;
-					}
-					body = new Buffer(data.content, 'base64'); // Ta-da
-
-
-					if (!db[id])
-						db[id] = {}
-
-					db[id].description = body.toString();
-				});
-			}).on('error', function(e) {
+	if (filefetch.from_link(item.link, file,
+			function(res, body, url) {
 				running--;
-				console.log("Got an error: ", e);
-			});
 
-			console.log("Polling " + id + ": " + item.link);
+				var id = item.author.toLowerCase() + "/" + item.name.toLowerCase();
+				console.log("Got " + item.name + ": '" + body + "'");
+				if (!db[id]) {
+					db[id] = {}
+				}
+				db[id][property] = body.toString();
 
-			return true;
-		} else {
-			console.log("No match on " + id + ": " + item.link);
-		}
+				if (success) {
+					success(res, body);
+				}
+			},
+			function(res, body, url) {
+				running--;
+				console.log(url + ": " + res.statusCode + ": " + body)
+			})) {
+		running++;
+		return true;
+	} else {
+		return false;
 	}
+}
 
-	return false;
+function runOn(item) {
+	return propertyFromFile(item, "depends.txt", "depends", function(res, body) {
+		var id = item.author.toLowerCase() + "/" + item.name.toLowerCase();
+		var dep_string = db[id].depends;
+		var all_depends = dep_string.split("\n");
+		db[id].depends = [];
+		db[id].soft_depends = [];
+		for (var i = 0; i < all_depends.length; i++) {
+			var dep = all_depends[i].trim();
+			if (dep != "") {
+				if (dep[dep.length - 1] == '?') {
+					db[id].soft_depends.push(dep.slice(0, -1));
+				} else {
+					db[id].depends.push(dep);
+				}
+			}
+		}
+	});// && propertyFromFile(item, "description.txt", "description");
 }
 
 var pointer = 0;
