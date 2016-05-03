@@ -111,6 +111,7 @@ http.get(url, function(res) {
 		var c_ver = 0;
 		var c_potwrong = 0;
 		var c_link_error = 0;
+		var c_github = 0;
 		var total = resp.length;
 		var ret = [];
 		var out_errors = {};
@@ -189,6 +190,10 @@ http.get(url, function(res) {
 				{re: /repo.or.cz\/([\w-]+)\/([\w-]+)/g,    out: "http://repo.or.cz/{0}/{1}.git/snapshot/master.zip"},
 				{re: /notabug.org\/([\w-]+)\/([\w-]+)/g,    out: "https://notabug.org/{0}/{1}/archive/master.zip"},
 			];
+
+			if (mod.link.toLowerCase().indexOf("github.com") >= 0) {
+				c_github++;
+			}
 
 			mod.link = (function(link) {
 				function findTwo(link, re) {
@@ -357,6 +362,7 @@ http.get(url, function(res) {
 		console.log(" - " + c_ver + " were verified/trusted.");
 		console.log(" - " + (total - not_added - c_ver) + " were non-verified/untrusted.");
 		console.log(" - " + c_potwrong + " had downloads which didn't mention the modname.");
+		console.log(" - " + c_github + " / " + (total - not_added) + " were on github.")
 		console.log("Wrote list to " + settings.listfile);
 		if (settings.debugout != "") {
 			console.log("Dumped debug out into " + settings.debugout + "/")
