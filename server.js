@@ -60,7 +60,11 @@ app.get('/mods', function (req, res) {
                 basename: mod.name,
                 author: mod.author,
                 value: 0,
-                version_set: 0
+                version_set: [{
+                    id: 0,
+                    date: 0,
+                    file: "/download/" + mod.author + "/" + mod.name
+                }]
             });
         }
 
@@ -97,15 +101,17 @@ app.get('/mods', function (req, res) {
 });
 
 app.get('/mod/:modname', function (req, res) {
-    var modname = req.params.modname;
-    var mod = model.getMod(modname);
-    if (mod != null) {
+    var mod = model.getMod(req.params.modname);
+    if (mod != null && mod.id >= 0) {
         res.send({
-            id: mod.id || -1,
+            id: mod.id,
             title: mod.title || mod.name,
             basename: mod.name,
             desc: mod.description || "",
-            author: mod.author,
+            author: {
+                id: 0,
+                username: mod.author
+            },
             replink: mod.link,
             depends: mod.depends || [],
             softdep: mod.soft_depends || [],
@@ -113,11 +119,16 @@ app.get('/mod/:modname', function (req, res) {
             titlepic: "",
             date: 0,
             reports: "",
-            version_set: 0,
-            download_url: "download/" + mod.author + "/" + mod.name
+            version_set: [{
+                id: 0,
+                date: 0,
+                file: "/download/" + mod.author + "/" + mod.name
+            }],
+            download_url: "/download/" + mod.author + "/" + mod.name
         });
     } else {
-        res.end("404");
+        console.log(req.originalUrl);
+        res.end("404 (" + modname + ")");
     }
 });
 
@@ -125,6 +136,8 @@ app.get("/download/:author/:modname", function(req, res) {
     var author = req.params.author;
     var modname = req.params.modname;
     var mod = model.getMod(modname);
+
+    console.log("Redirecting to download at " + mod.link);
 
     res.redirect(mod.link);
 });

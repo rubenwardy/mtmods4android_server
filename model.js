@@ -34,9 +34,14 @@ function getList() {
 function getMod(modname) {
 	var list = getListNoReports();
 
+	var is_id = /^\d+$/.test(modname.trim());
+
 	for (var i = 0; i < list.length; i++) {
 		var mod = list[i];
-		if (mod.name == modname) {
+		if (
+					(is_id && i == modname) ||
+					(!is_id && mod.name == modname)
+				) {
 			mod.id = i;
 			return mod;
 		}
