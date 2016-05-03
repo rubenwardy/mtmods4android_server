@@ -3346,5 +3346,11 @@
         "timestamp": 1462234397908,
         "final_url": "http://splizard.com/minetest/mods/suffocating/suffocating-1.0.zip",
         "size": 0
+    },
+    "https://github.com/rubenwardy/food/archive/master.zip": {
+        "status": 200,
+        "timestamp": 1462244950975,
+        "final_url": "https://codeload.github.com/rubenwardy/food/zip/master",
+        "size": 46697
     }
 }

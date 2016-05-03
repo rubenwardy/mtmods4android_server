@@ -14,7 +14,7 @@
         "soft_depends": []
     },
     "rubenwardy/food": {
-        "description": "The largest supporting food mod for Minetest. Adds soups, cakes, bakes and juices.\n"
+        "description": "Adds soups, cakes, bakes and juices. The largest supporting food mod for Minetest.\n"
     },
     "nore/mg": {
         "description": "This mod changes the default map generation: it changes the way ores are placed, add new biomes and villages.\nNote: do NOT use it in an already generated world!!!",

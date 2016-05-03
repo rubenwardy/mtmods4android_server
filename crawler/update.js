@@ -13,6 +13,7 @@ if (!String.prototype.format) {
 var fs = require('fs');
 var link_blacklist = JSON.parse(fs.readFileSync("data/blacklist.json", 'utf8'));
 var link_verified = JSON.parse(fs.readFileSync("data/verified.json", 'utf8'));
+var basename_override = JSON.parse(fs.readFileSync("data/basename_override.json", 'utf8'));
 var db = JSON.parse(fs.readFileSync("data/db.json", 'utf8'));
 var url_cachefile = JSON.parse(fs.readFileSync("data/url_result_cache.json", 'utf8'));
 var settings = JSON.parse(fs.readFileSync("settings.json", 'utf8'));
@@ -249,6 +250,14 @@ http.get(url, function(res) {
 					}
 				}
 			} while (m);
+
+			for (var key in basename_override) {
+				if (basename_override.hasOwnProperty(key) && mod.link.indexOf(key) >= 0) {
+					console.log("Overriding " + key + " -> " + basename_override[key]);
+					basename = basename_override[key];
+					break;
+				}
+			}
 
 			// Check modname/basename
 			if (basename == null) {
