@@ -63,7 +63,7 @@ app.get('/mods', function (req, res) {
                 version_set: [{
                     id: 0,
                     date: 0,
-                    file: "/download/" + mod.author + "/" + mod.name
+                    file: "download/" + mod.author + "/" + mod.name + "/"
                 }]
             });
         }
@@ -122,9 +122,9 @@ app.get('/mod/:modname', function (req, res) {
             version_set: [{
                 id: 0,
                 date: 0,
-                file: "/download/" + mod.author + "/" + mod.name
+                file: "download/" + mod.author + "/" + mod.name + "/"
             }],
-            download_url: "/download/" + mod.author + "/" + mod.name
+            download_url: "download/" + mod.author + "/" + mod.name + "/"
         });
     } else {
         console.log(req.originalUrl);
