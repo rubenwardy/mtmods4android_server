@@ -128,7 +128,7 @@ app.get('/mod/:modname', function (req, res) {
         });
     } else {
         console.log(req.originalUrl);
-        res.end("404 (" + modname + ")");
+        res.status(404).send('Not found');
     }
 });
 
@@ -137,9 +137,12 @@ app.get("/download/:author/:modname", function(req, res) {
     var modname = req.params.modname;
     var mod = model.getMod(modname);
 
-    console.log("Redirecting to download at " + mod.link);
-
-    res.redirect(mod.link);
+    if (mod) {
+        console.log("Redirecting to download at " + mod.link);
+        res.redirect(mod.link);
+    } else {
+        res.status(404).send('Not found');
+    }
 });
 
 app.get('/blacklist', function (req, res) {
