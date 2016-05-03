@@ -1,4 +1,6 @@
 var fs = require('fs');
+var memCache = require('memory-cache');
+var cacheTime = 1000*60*5;
 var reports = null;
 
 try {
@@ -9,29 +11,47 @@ try {
 
 function getListNoReports()
 {
-    return JSON.parse(fs.readFileSync("crawler/out/list.json", 'utf8'));
+    var json = memCache.get("listNoReports");
+	if (!json) {
+		console.log("Cache miss, regenerating listNoReports");
+		json = JSON.parse(fs.readFileSync("crawler/out/list.json", 'utf8'));
+		memCache.put("listNoReports", json, cacheTime);
+	}
+	return json;
 }
 
 function getList() {
-	var res = getListNoReports();
-    for (var i = 0; i < res.length; i++) {
-        var mod = res[i];
-        var idx = mod.author + "/" + mod.name;
-        var reps = reports[idx];
-        if (reps) {
-            mod.reports = {};
-            for (var j = 0; j < reps.length; j++) {
-                var report = reps[j];
-                mod.reports[report.type] =
-                    mod.reports[report.type] ? mod.reports[report.type] + 1 : 1;
-            }
-        }
-    }
+	var res = memCache.get("listWithReports");
+	if (!res) {
+		console.log("Cache miss, regenerating listWithReports");
+		res = getListNoReports();
+	    for (var i = 0; i < res.length; i++) {
+	        var mod = res[i];
+	        var idx = mod.author + "/" + mod.name;
+	        var reps = reports[idx];
+	        if (reps) {
+	            mod.reports = {};
+	            for (var j = 0; j < reps.length; j++) {
+	                var report = reps[j];
+	                mod.reports[report.type] =
+	                    mod.reports[report.type] ? mod.reports[report.type] + 1 : 1;
+	            }
+	        }
+	    }
+		memCache.put("listWithReports", res, cacheTime);
+	}
 
     return res;
 }
 
 function getMod(modname) {
+	var retval = memCache.get("mod_" + modname);
+	if (retval) {
+		return retval;
+	}
+
+	console.log("Cache miss, regenerating getMod");
+
 	var list = getListNoReports();
 
 	var is_id = /^\d+$/.test(modname.trim());
@@ -43,6 +63,7 @@ function getMod(modname) {
 					(!is_id && mod.name == modname)
 				) {
 			mod.id = i;
+			memCache.put("mod_" + modname, mod, cacheTime);
 			return mod;
 		}
 	}
@@ -52,34 +73,41 @@ function getMod(modname) {
 
 function getPopularMods()
 {
-	var res = JSON.parse(fs.readFileSync("crawler/out/list.json", 'utf8'));
-	var lookup = {};
-	for (var i = 0; i < res.length; i++) {
-		var mod = res[i];
-		mod.downloads = 0;
-		lookup[mod.author + "/" + mod.name] = mod;
-	}
+	var retval = memCache.get("popularMods");
+	if (!retval) {
+		console.log("Cache miss, regenerating popularMods");
 
-	var lines = fs.readFileSync("downloads.txt", 'utf8').split("\n");
-	for (var i = 0; i < lines.length; i++) {
-		var parts = lines[i].split("\t");
-		if (parts.length > 4 && parts[0] == "200") {
-			var author = parts[2];
-			var modname = parts[3];
-			var mod = lookup[author + "/" + modname];
-			if (mod) {
-				mod.downloads++;
-			} else {
-				console.log("Mod " + author + "/" + modname + " not found in list.json! (Model.getPopularMods)")
+		var res = JSON.parse(fs.readFileSync("crawler/out/list.json", 'utf8'));
+		var lookup = {};
+		for (var i = 0; i < res.length; i++) {
+			var mod = res[i];
+			mod.downloads = 0;
+			lookup[mod.author + "/" + mod.name] = mod;
+		}
+
+		var lines = fs.readFileSync("downloads.txt", 'utf8').split("\n");
+		for (var i = 0; i < lines.length; i++) {
+			var parts = lines[i].split("\t");
+			if (parts.length > 4 && parts[0] == "200") {
+				var author = parts[2];
+				var modname = parts[3];
+				var mod = lookup[author + "/" + modname];
+				if (mod) {
+					mod.downloads++;
+				} else {
+					console.log("Mod " + author + "/" + modname + " not found in list.json! (Model.getPopularMods)")
+				}
 			}
 		}
+
+		res.sort(function(a,b) {
+			return (a.downloads < b.downloads) ? 1 : ((b.downloads < a.downloads) ? -1 : 0);
+		});
+		retval = res.splice(0, 10);
+		memCache.put("popularMods", retval, cacheTime);
 	}
 
-	res.sort(function(a,b) {
-		return (a.downloads < b.downloads) ? 1 : ((b.downloads < a.downloads) ? -1 : 0);
-	});
-
-	return res.splice(0, 10);
+	return retval;
 }
 
 var accepted_types = ["mal", "dw", "other"];
