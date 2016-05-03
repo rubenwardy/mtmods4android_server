@@ -7,10 +7,13 @@ try {
 	reports = {};
 }
 
-function getList()
+function getListNoReports()
 {
-    var res = JSON.parse(fs.readFileSync("crawler/out/list.json", 'utf8'));
+    return JSON.parse(fs.readFileSync("crawler/out/list.json", 'utf8'));
+}
 
+function getList() {
+	var res = getListNoReports();
     for (var i = 0; i < res.length; i++) {
         var mod = res[i];
         var idx = mod.author + "/" + mod.name;
@@ -26,6 +29,20 @@ function getList()
     }
 
     return res;
+}
+
+function getMod(modname) {
+	var list = getListNoReports();
+
+	for (var i = 0; i < list.length; i++) {
+		var mod = list[i];
+		if (mod.name == modname) {
+			mod.id = i;
+			return mod;
+		}
+	}
+
+	return null;
 }
 
 function getPopularMods()
@@ -87,6 +104,8 @@ function report(res) {
 module.exports = {
 	report: report,
 	getList: getList,
+	getListNoReports: getListNoReports,
+	getMod: getMod,
 	getPopularMods: getPopularMods,
 	getReports: function() {
 		return reports;

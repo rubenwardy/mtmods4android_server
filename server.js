@@ -48,32 +48,85 @@ app.get('/status', function (req, res) {
 });
 
 app.get('/mods', function (req, res) {
-    var q = (req.query.q) ? req.query.q.trim().toLowerCase() : "";
-    var mods = [];
-    var tmp = model.getList();
-    if (q == "") {
-        mods = tmp;
+    if (req.headers.accept.indexOf("application/vnd.minetest.mmdb-v1+json") >= 0) {
+        var list = model.getListNoReports();
+        var ret = [];
+
+        for (var i = 0; i < list.length; i++) {
+            var mod = list[i];
+            ret.push({
+                id: i,
+                title: mod.title || mod.name,
+                basename: mod.name,
+                author: mod.author,
+                value: 0,
+                version_set: 0
+            });
+        }
+
+        res.header("Content-Type", "application/vnd.minetest.mmdb-v1+json");
+        res.send(ret);
     } else {
-        for (var i = 0; i < tmp.length; i++) {
-            var mod = tmp[i];
-            if (mod.name.indexOf(q) >= 0 || mod.author.indexOf(q) >= 0 ||
-                    mod.title.indexOf(q) >= 0 ||
-                    (mod.description && mod.description.indexOf(q) >= 0)) {
-                mods.push(mod);
+        var q = (req.query.q) ? req.query.q.trim().toLowerCase() : "";
+        var mods = [];
+        var tmp = model.getList();
+        if (q == "") {
+            mods = tmp;
+        } else {
+            for (var i = 0; i < tmp.length; i++) {
+                var mod = tmp[i];
+                if (mod.name.indexOf(q) >= 0 || mod.author.indexOf(q) >= 0 ||
+                        mod.title.indexOf(q) >= 0 ||
+                        (mod.description && mod.description.indexOf(q) >= 0)) {
+                    mods.push(mod);
+                }
             }
         }
-    }
 
-    // Error Message
-    var error = null;
-    if (!mods) {
-        if (!req.query.a) {
-            error = "Please enter a forum username";
-        } else {
-            error = "Unable to find your mods. Are you sure that you've typed your forum name correctly?";
+        // Error Message
+        var error = null;
+        if (!mods) {
+            if (!req.query.a) {
+                error = "Please enter a forum username";
+            } else {
+                error = "Unable to find your mods. Are you sure that you've typed your forum name correctly?";
+            }
         }
+        res.render('mods', {title: "Search " + q, mods: mods, search: q});
     }
-    res.render('mods', {title: "Search " + q, mods: mods, search: q});
+});
+
+app.get('/mod/:modname', function (req, res) {
+    var modname = req.params.modname;
+    var mod = model.getMod(modname);
+    if (mod != null) {
+        res.send({
+            id: mod.id || -1,
+            title: mod.title || mod.name,
+            basename: mod.name,
+            desc: mod.description || "",
+            author: mod.author,
+            replink: mod.link,
+            depends: mod.depends || [],
+            softdep: mod.soft_depends || [],
+            value: 0,
+            titlepic: "",
+            date: 0,
+            reports: "",
+            version_set: 0,
+            download_url: "download/" + mod.author + "/" + mod.name
+        });
+    } else {
+        res.end("404");
+    }
+});
+
+app.get("/download/:author/:modname", function(req, res) {
+    var author = req.params.author;
+    var modname = req.params.modname;
+    var mod = model.getMod(modname);
+
+    res.redirect(mod.link);
 });
 
 app.get('/blacklist', function (req, res) {
