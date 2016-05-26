@@ -3352,5 +3352,53 @@
         "timestamp": 1462244950975,
         "final_url": "https://codeload.github.com/rubenwardy/food/zip/master",
         "size": 46697
+    },
+    "https://forum.minetest.net/download/file.php?id=6051": {
+        "status": 200,
+        "timestamp": 1464284546774,
+        "final_url": "https://forum.minetest.net/download/file.php?id=6051",
+        "size": 22302
+    },
+    "https://forum.minetest.net/download/file.php?id=6261": {
+        "status": 200,
+        "timestamp": 1464284546777,
+        "final_url": "https://forum.minetest.net/download/file.php?id=6261",
+        "size": 39920
+    },
+    "https://github.com/ciubotaru/compost/archive/master.zip": {
+        "status": 404,
+        "timestamp": 1464284547120,
+        "final_url": "https://codeload.github.com/ciubotaru/compost/zip/master",
+        "size": 9
+    },
+    "https://github.com/pithydon/viaduct/archive/master.zip": {
+        "status": 200,
+        "timestamp": 1464284547474,
+        "final_url": "https://codeload.github.com/pithydon/viaduct/zip/master",
+        "size": 5827
+    },
+    "https://github.com/minetest-mods/castle/archive/master.zip": {
+        "status": 200,
+        "timestamp": 1464284555103,
+        "final_url": "https://codeload.github.com/minetest-mods/castle/zip/master",
+        "size": 461024
+    },
+    "https://github.com/minetest-mods/xdecor/archive/master.zip": {
+        "status": 200,
+        "timestamp": 1464284555106,
+        "final_url": "https://codeload.github.com/minetest-mods/xdecor/zip/master",
+        "size": 411187
+    },
+    "https://github.com/minetest-mods/ts_furniture/archive/master.zip": {
+        "status": 200,
+        "timestamp": 1464284555109,
+        "final_url": "https://codeload.github.com/minetest-mods/ts_furniture/zip/master",
+        "size": 671559
+    },
+    "https://github.com/Jeija/minetest-mod-mesecons/archive/master.zip": {
+        "status": 200,
+        "timestamp": 1464284555114,
+        "final_url": "https://codeload.github.com/Jeija/minetest-mod-mesecons/zip/master",
+        "size": 3651229
     }
 }

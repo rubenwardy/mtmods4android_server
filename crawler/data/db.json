@@ -189,10 +189,12 @@
             "default",
             "farming",
             "stairs",
-            "flowers"
+            "flowers",
+            "doors"
         ],
         "soft_depends": [
-            "bakedclay"
+            "bakedclay",
+            "moreblocks"
         ]
     },
     "sapier/factions": {
@@ -585,7 +587,8 @@
         ],
         "soft_depends": [
             "mesecons",
-            "mesecons_mvps"
+            "mesecons_mvps",
+            "digilines"
         ]
     },
     "vanessae/signs_lib": {
@@ -1672,9 +1675,13 @@
     },
     "maikerumine/badplayer": {
         "depends": [
-            "default"
+            "default",
+            "mobs"
         ],
-        "soft_depends": []
+        "soft_depends": [
+            "farming",
+            "bones"
+        ]
     },
     "napiophelios/campfire": {
         "depends": [
@@ -2233,7 +2240,9 @@
     },
     "mtmodder148/unifiedwool": {
         "depends": [
-            "dye\nwool\nunifieddyes"
+            "dye",
+            "wool",
+            "unifieddyes"
         ],
         "soft_depends": []
     },
@@ -2251,26 +2260,72 @@
     },
     "general3214/useless_mod": {
         "depends": [
-            "default\nbones\nwool"
+            "default",
+            "bones",
+            "wool"
         ],
         "soft_depends": []
     },
     "wowiamdiamonds/unifiedbricks": {
         "depends": [
-            "default\nbucket\nunifieddyes\nvessels"
+            "default",
+            "bucket",
+            "unifieddyes",
+            "vessels"
         ],
         "soft_depends": []
     },
     "raphael/various": {
         "depends": [
-            "default\nflowers\nmoreores\ncraft_guide"
+            "default",
+            "flowers",
+            "moreores",
+            "craft_guide"
         ],
         "soft_depends": []
     },
     "electricsolstice/voltbuild": {
-        "depends": [],
+        "depends": [
+            "default",
+            "mesecons"
+        ],
         "soft_depends": [
-            "default\nmesecons\nbucket"
+            "bucket"
+        ]
+    },
+    "philipbenr/castle": {
+        "depends": [
+            "default",
+            "stairs",
+            "doors",
+            "farming"
+        ],
+        "soft_depends": [
+            "building_blocks",
+            "asphalt",
+            "streets",
+            "moreblocks",
+            "xpanes"
+        ]
+    },
+    "thomas-s/ts_furniture": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "moretrees"
+        ]
+    },
+    "pithy/viaduct": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "deco",
+            "hemp",
+            "lottblocks",
+            "lottplants",
+            "moreblocks"
         ]
     }
 }
