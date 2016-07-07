@@ -4,6 +4,7 @@ settings.json
 downloads.txt
 reports.json
 downloads.json
+/data
 
 
 # Created by https://www.gitignore.io/api/node,linux
