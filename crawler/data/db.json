@@ -194,7 +194,8 @@
         ],
         "soft_depends": [
             "bakedclay",
-            "moreblocks"
+            "moreblocks",
+            "intllib"
         ]
     },
     "sapier/factions": {
@@ -323,14 +324,19 @@
             "default",
             "wool"
         ],
-        "soft_depends": []
+        "soft_depends": [
+            "intllib"
+        ]
     },
     "tenplus1/mobs": {
         "description": "Adds a mob api for mods to add animals or monsters etc.",
         "depends": [
             "default"
         ],
-        "soft_depends": []
+        "soft_depends": [
+            "invisibility",
+            "intllib"
+        ]
     },
     "don/mycorners": {
         "description": "Put decorative corners on blocks.\n\nmycorners makes it so you can add  corners on blocks like the corners of castles and houses. \n\nJust build a machine and make your cornerboards. You can add the corners to blocks in the machine or use the hammer to set them.\n\nYou will have beautiful buildings in no time.\n",
@@ -470,7 +476,11 @@
         "depends": [
             "default"
         ],
-        "soft_depends": []
+        "soft_depends": [
+            "mudbrick",
+            "nether",
+            "xdecor"
+        ]
     },
     "pilzadam/nether": {
         "description": "Adds a deep underground realm with different mapgen that you can reach with obsidian portals.\n",
@@ -478,7 +488,9 @@
             "stairs",
             "default"
         ],
-        "soft_depends": []
+        "soft_depends": [
+            "moreblocks"
+        ]
     },
     "vanessae/biome_lib": {
         "description": "The biome spawning and management library for Plantlife, Moretrees, Tiny Trees, and other mods that originally depended on plants_lib from the plantlife modpack.\n",
@@ -534,7 +546,11 @@
         "soft_depends": []
     },
     "jeija/minetest-mod-digilines": {
-        "description": "This mod adds digiline wires, an RTC (Real Time Clock), a light sensor as well as an LCD Screen. Can be used together with the luacontroller from mesecons.\n"
+        "description": "This mod adds digiline wires, an RTC (Real Time Clock), a light sensor as well as an LCD Screen. Can be used together with the luacontroller from mesecons.\n",
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
     },
     "calinou/moreblocks": {
         "description": "Adds various miscellaneous blocks to the game.\n",
@@ -549,12 +565,14 @@
         "description": "This mod adds a whole bunch of new types of trees to the game\n",
         "depends": [
             "default",
-            "biome_lib"
+            "biome_lib",
+            "vessels"
         ],
         "soft_depends": [
             "stairs",
             "moreblocks",
-            "intllib"
+            "intllib",
+            "farming"
         ]
     },
     "megaf/more_chests": {
@@ -1271,7 +1289,8 @@
         ],
         "soft_depends": [
             "doors",
-            "mobs"
+            "mobs",
+            "intllib"
         ]
     },
     "paramat/projects": {
@@ -1303,7 +1322,8 @@
             "hbhunger",
             "farming",
             "mobs",
-            "ethereal"
+            "ethereal",
+            "stamina"
         ]
     },
     "pilzadam/player_textures": {
@@ -1484,7 +1504,9 @@
             "default",
             "vessels"
         ],
-        "soft_depends": []
+        "soft_depends": [
+            "intllib"
+        ]
     },
     "paramat/trail": {
         "depends": [
@@ -1597,7 +1619,9 @@
             "default",
             "farming"
         ],
-        "soft_depends": []
+        "soft_depends": [
+            "intllib"
+        ]
     },
     "krock/yappy": {
         "depends": [
@@ -2326,6 +2350,45 @@
             "lottblocks",
             "lottplants",
             "moreblocks"
+        ]
+    },
+    "tumeninodes/angledstairs": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "pithy/curtain": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": [
+            "wool",
+            "carpet_api"
+        ]
+    },
+    "pithy/furniture": {
+        "depends": [
+            "default"
+        ],
+        "soft_depends": []
+    },
+    "pithy/hemp": {
+        "depends": [
+            "default",
+            "farming"
+        ],
+        "soft_depends": []
+    },
+    "pithy/steep_stairs": {
+        "depends": [],
+        "soft_depends": [
+            "default",
+            "lottplants",
+            "moreblocks",
+            "moretrees",
+            "partialblocks",
+            "stairs"
         ]
     }
 }
