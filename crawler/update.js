@@ -17,6 +17,7 @@ var basename_override = JSON.parse(fs.readFileSync("data/basename_override.json"
 var db = JSON.parse(fs.readFileSync("data/db.json", 'utf8'));
 var url_cachefile = JSON.parse(fs.readFileSync("data/url_result_cache.json", 'utf8'));
 var settings = JSON.parse(fs.readFileSync("settings.json", 'utf8'));
+var min_size=  0;
 
 var sort_by;
 
@@ -85,7 +86,7 @@ var sort_by;
     }
 }());
 
-// https://github.com/SmallJoker/boost_cart/blob/master/description.txt
+var longest = "";
 
 var http = require("http");
 var url = "http://krock-works.16mb.com/MTstuff/modList.php";
@@ -146,6 +147,14 @@ http.get(url, function(res) {
 
 		for (var i = 0; i < total; i++) {
 			var mod = resp[i];
+
+
+						if (mod.description) {
+							if (mod.description.length > min_size) {
+								min_size = mod.description.length;
+								longest = mod.description;
+							}
+						}
 
 			mod.score = 0;
 
@@ -335,6 +344,12 @@ http.get(url, function(res) {
 				}
 			}
 
+			if (mod.description) {
+				if (mod.description.length > min_size) {
+					min_size = mod.description.length;
+				}
+			}
+
 			addSuccess(mod.author, mod);
 
 			ret.push(mod);
@@ -367,6 +382,8 @@ http.get(url, function(res) {
 		if (settings.debugout != "") {
 			console.log("Dumped debug out into " + settings.debugout + "/")
 		}
+		console.log("Longest desc is " + min_size);
+		console.log(longest);
 	});
 }).on('error', function(e) {
 	console.log("Got an error: ", e);
