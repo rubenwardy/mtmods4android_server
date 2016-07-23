@@ -185,8 +185,12 @@ app.get('/verified', function (req, res) {
     res.render('verified', {title: "Verified", links: model.getVerified()});
 });
 
-app.get('/v1/list', apicache('5 minutes'), function (req, res) {
+app.get('/v2/list', apicache('5 minutes'), function (req, res) {
     res.send(model.getList());
+});
+
+app.get('/v1/list', apicache('5 minutes'), function (req, res) {
+    res.send(model.getOldList());
 });
 
 app.post('/v1/on-download', function(req, res) {

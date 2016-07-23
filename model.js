@@ -44,6 +44,41 @@ function getList() {
     return res;
 }
 
+function getOldListNoReports()
+{
+    var json = memCache.get("oldListNoReports");
+	if (!json) {
+		console.log("Cache miss, regenerating listNoReports");
+		json = JSON.parse(fs.readFileSync("crawler/out/old_list.json", 'utf8'));
+		memCache.put("oldListNoReports", json, cacheTime);
+	}
+	return json;
+}
+
+function getOldList() {
+	var res = memCache.get("oldListWithReports");
+	if (!res) {
+		console.log("Cache miss, regenerating listWithReports");
+		res = getOldListNoReports();
+	    for (var i = 0; i < res.length; i++) {
+	        var mod = res[i];
+	        var idx = mod.author + "/" + mod.name;
+	        var reps = reports[idx];
+	        if (reps) {
+	            mod.reports = {};
+	            for (var j = 0; j < reps.length; j++) {
+	                var report = reps[j];
+	                mod.reports[report.type] =
+	                    mod.reports[report.type] ? mod.reports[report.type] + 1 : 1;
+	            }
+	        }
+	    }
+		memCache.put("oldListWithReports", res, cacheTime);
+	}
+
+    return res;
+}
+
 function getMod(modname) {
 	var retval = memCache.get("mod_" + modname);
 	if (retval) {
