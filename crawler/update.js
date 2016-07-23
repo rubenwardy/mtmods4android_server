@@ -101,6 +101,8 @@ http.get(url, function(res) {
 		var stats = {
 			min_size: 0,
 			longest: "",
+			errors: {},
+			source: {},
 			c_lm: 0,
 			c_lb: 0,
 			c_wt: 0,
@@ -116,7 +118,8 @@ http.get(url, function(res) {
 
 		console.log("Processing mods...");
 		Mod.processAllMods(stats, resp).then(function(res) {
-			ret = res.sort(sort_by({name:'score', primer: parseInt, reverse: true}, 'name'));
+			console.log("Done processing. Sorting...");
+			var ret = res.sort(sort_by({name:'score', primer: parseInt, reverse: true}, 'basename'));
 
 			var text = JSON.stringify(ret);
 			fs.writeFileSync(settings.listfile, text);
@@ -128,25 +131,38 @@ http.get(url, function(res) {
 			console.log("Wrote " + ret.length + " entries to file.");
 			console.log((stats.total - ret.length) + " out of " + stats.total + " entries weren't added.");
 			console.log(" - " + not_added + " had errors");
-			console.log(" - " + stats.c_wt + " were not mods or modpacks in mod releases.");
-			console.log(" - " + stats.c_a + " had no author.");
-			console.log(" - " + stats.c_b + " failed to find a mod name / basename in their title.");
-			console.log(" - " + stats.c_lm + " had missing download/repo links.");
-			console.log(" - " + stats.c_lb + " had blacklisted download/repo links.");
-			console.log(" - " + stats.c_link_error + " had 404 or wrong content-type downloads.");
+			for (var key in stats.errors) {
+				if (stats.errors.hasOwnProperty(key)) {
+					console.log(" - " + stats.errors[key] + " " + key);
+				}
+			}
+			// console.log(" - " + stats.c_wt + " were not mods or modpacks in mod releases.");
+			// console.log(" - " + stats.c_a + " had no author.");
+			// console.log(" - " + stats.c_b + " failed to find a mod name / basename in their title.");
+			// console.log(" - " + stats.c_lm + " had missing download/repo links.");
+			// console.log(" - " + stats.c_lb + " had blacklisted download/repo links.");
+			// console.log(" - " + stats.c_link_error + " had 404 or wrong content-type downloads.");
 			console.log("Out of the added entries:");
 			console.log(" - " + stats.c_ver + " were verified/trusted.");
 			console.log(" - " + (stats.total - not_added - stats.c_ver) + " were non-verified/untrusted.");
 			console.log(" - " + stats.c_potwrong + " had downloads which didn't mention the modname.");
-			console.log(" - " + stats.c_github + " / " + (stats.total - not_added) + " were on github.")
+			var sum = 0;
+			for (var key in stats.source) {
+				if (stats.source.hasOwnProperty(key)) {
+					var num_from_source = stats.source[key];
+					console.log(" - " + num_from_source + " were from " + key);
+					sum += num_from_source;
+				}
+			}
+			console.log(" - " + (ret.length - sum) + " were from elsewhere");
 			console.log("Wrote list to " + settings.listfile);
 			if (settings.debugout != "") {
 				console.log("Dumped debug out into " + settings.debugout + "/")
 			}
 			console.log("stats.longest desc is " + stats.min_size);
 			console.log(stats.longest);
-		}).catch(function() {
-			console.log("Failed processing all mods")
+		}).catch(function(e) {
+			console.log("Failed processing all mods: " + e)
 		})
 
 	});

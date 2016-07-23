@@ -1,6 +1,10 @@
 "esversion: 6";
 
 class RepoServer {
+	constructor(cachepath) {}
+
+	saveCache() {}
+
 	getServerName() {}
 
 	// Returns tupple: user, repo. Returns immediately
@@ -30,16 +34,31 @@ class GithubRepoServer extends RepoServer {
 		return "github.com"
 	}
 
-	constructor() {
+	constructor(cachepath) {
 		super();
 		this.github = null;
+		this.cachepath = cachepath
+		this.cache = {};
+		this.hits = 0;
+		this.misses = 0;
+
+		try {
+			this.cache = JSON.parse(fs.readFileSync(this.cachepath, 'utf8'));
+		} catch(e) {
+			this.cache = {};
+		}
+	}
+
+	saveCache() {
+		console.log("Saving cache...");
+		fs.writeFile(this.cachepath, JSON.stringify(this.cache));
 	}
 
 	connect() {
 		var GitHubApi = require("github");
 		this.github = new GitHubApi({
 		    // optional
-		    debug: true,
+		    // debug: true,
 		    protocol: "https",
 		    host: "api.github.com", // should be api.github.com for GitHub
 		    pathPrefix: "", // for some GHEs; none for GitHub
@@ -80,22 +99,59 @@ class GithubRepoServer extends RepoServer {
 	}
 
 	getDescriptionFromRepo(repo) {
+
+
+
 		if (!this.github) {
 			this.connect();
 		}
 		var me = this;
 		return new Promise(function(resolve, reject) {
-			me.github.repos.getContent({
-				user: repo.user,
-				repo: repo.repo,
-				path: "description.txt"
-			}).then(function(data) {
-				if (data && data.content) {
-					resolve(new Buffer(data.content, 'base64'));
-				} else {
+			var idx = repo.user + "/" + repo.repo;
+			var cached = me.cache[idx];
+			if (cached && cached.desc) {
+				me.hits++;
+				console.log("Cache hit");
+				resolve(cached.desc.text);
+			} else {
+				me.misses++;
+				me.github.repos.getContent({
+					user: repo.user,
+					repo: repo.repo,
+					path: "description.txt"
+				}).then(function(data) {
+					if (data && data.content) {
+						if (!cached) {
+							 cached = {}
+							 me.cache[idx] = cached;
+						}
+						var desc = new Buffer(data.content, 'base64').toString();
+						cached.desc = {
+							text: desc,
+							timestamp: new Date().getTime()
+						}
+						resolve(desc);
+					} else {
+						if (!cached) {
+							me.cache[idx] = {};
+						}
+						cached.desc = {
+							text: "",
+							timestamp: new Date().getTime()
+						}
+						reject();
+					}
+				}).catch(function(e) {
+					if (!cached) {
+						me.cache[idx] = {};
+					}
+					cached.desc = {
+						text: "",
+						timestamp: new Date().getTime()
+					}
 					reject();
-				}
-			});
+				})
+			}
 		});
 	}
 
@@ -115,6 +171,8 @@ class GithubRepoServer extends RepoServer {
 				} else {
 					reject();
 				}
+			}).catch(function(e) {
+				reject(e);
 			});
 		});
 	}
@@ -125,28 +183,75 @@ class GithubRepoServer extends RepoServer {
 		}
 		var me = this;
 		return new Promise(function (resolve, reject) {
-			var req = {
-				user: repo.user,
-				repo: repo.repo,
-				per_page: 1
-			};
-			if (branch) {
-				req.sha = branch;
-			}
-			me.github.repos.getCommits(req).then(function(res) {
-				console.log(res);
-				if (res && res.length == 1) {
-					var sha = res[0].sha;
-					resolve({
-						link: "https://github.com/" + repo.user + "/" + repo.repo + "/archive/" + sha + ".zip",
-						commit: sha
-					});
-				} else {
-					reject();
+			var idx = repo.user + "/" + repo.repo;
+			var cached = me.cache[idx];
+			if (cached && cached.download) {
+				me.hits++;
+				console.log("Cache hit for download");
+				resolve({
+					link: cached.download.link,
+					commit: cached.download.sha
+				});
+			} else {
+				me.misses++;
+				var req = {
+					user: repo.user,
+					repo: repo.repo,
+					per_page: 1
+				};
+				if (branch) {
+					req.sha = branch;
 				}
-			});
+				me.github.repos.getCommits(req).then(function(res) {
+					console.log(res);
+					if (res && res.length == 1) {
+						var sha = res[0].sha;
+						if (!cached) {
+							cached = {}
+							me.cache[idx] = cached;
+						}
+						var link = "https://github.com/" + repo.user + "/" +
+							repo.repo + "/archive/" + sha + ".zip"
+						cached.download = {
+							link: link,
+							sha: sha,
+							timestamp: new Date().getTime()
+						}
+						resolve({
+							link: link,
+							commit: sha
+						});
+					} else {
+						reject();
+					}
+				}).catch(function(e) {
+					reject(e);
+				});
+			}
 		})
 
+	}
+
+	getAllInfo(repo, mod) {
+		var me = this;
+		return new Promise(function(resolve, reject) {
+			me.getDownloadAndHash(repo, null).then(function(res) {
+				var link = res.link;
+				var commit = res.commit;
+				mod.download_link = link;
+				mod.commit_hash = commit;
+
+				me.getDescriptionFromRepo(repo).then(function(desc) {
+					mod.description = desc;
+					resolve();
+				}).catch(function(e) {
+					resolve();
+				});
+			}).catch(function(e) {
+				reject("unable to get download: " + e);
+			});
+			// reject("504: Gateway Timeout");
+		});
 	}
 }
 

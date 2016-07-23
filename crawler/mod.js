@@ -1,7 +1,9 @@
 class Mod {
 	constructor(author) {
 		this.author = author || null;
+		this.type = "1";
 		this.basename = null;
+		this.title = null;
 		this.description = "";
 		this.forum_url = null;
 		this.download_link = null;
@@ -31,7 +33,13 @@ class Mod {
 				}
 			}
 		} while (m);
-		this.basename = basename;
+
+		if (basename) {
+			this.basename = basename.toLowerCase();
+			this.title = title.replace("[" + basename + "]", "")
+				.replace("  ", " ").replace("  ", " ").replace("&#58;", ":")
+				.replace("&#39;", "'").trim();
+		}
 	}
 
 	getFirstProblem() {
@@ -39,6 +47,8 @@ class Mod {
 			return "needs forum author name";
 		} else if (!this.basename) {
 			return "needs basename";
+		} else if (!this.title) {
+			return "needs title (this should never happen)";
 		} else if (!this.download_link) {
 			return "needs download link";
 		} else {
@@ -57,9 +67,14 @@ class Mod {
 				res[key] = this[key];
 			}
 		}
-		console.log(res);
 		return res;
 	}
+
+	getScore() {
+		return 0;
+	}
 }
+
+console.log(new Date(1469294101* 1000));
 
 module.exports = Mod;

@@ -27,6 +27,7 @@ function linkIsVerified(link) {
 }
 
 function addMod(stats, author, details) {
+	author = author || "error";
 	author = author.toLowerCase();
 	if (details.constructor != Object) {
 		console.log(author);
@@ -59,25 +60,24 @@ function addSuccess(stats, author, mod) {
 
 console.log("Creating repo servers...");
 var reposervers = [];
-reposervers.push(new (RepoServers.GithubRepoServer)());
+reposervers.push(new (RepoServers.GithubRepoServer)("data/cache_github.json"));
 
 function getInfoFromModLink(stats, mod, link) {
 	return new Promise(function(resolve, reject) {
+		if (!link || link.length == 0) {
+			reject("needs download link");
+		}
+
 		for (var i = 0; i < reposervers.length; i++) {
 			var reposerver = reposervers[i];
 			var repo = reposerver.getRepoFromURL(link);
 			if (repo) {
+				var sname = reposerver.getServerName();
+				var cell = stats.source[sname]
+				stats.source[sname] = (cell) ? cell + 1 : 1
 				mod.repo_host = reposerver.getServerName();
 				mod.repo = reposerver.getRepoURL(repo);
-				reposerver.getDownloadAndHash(repo, null).then(function(res) {
-					var link = res.link;
-					var commit = res.commit;
-					mod.download_link = link;
-					mod.commit_hash = commit;
-					resolve();
-				}).catch(function(e) {
-					reject(e);
-				})
+				reposerver.getAllInfo(repo, mod).then(resolve).catch(reject);
 				return;
 			}
 		}
@@ -89,13 +89,14 @@ function getInfoFromModLink(stats, mod, link) {
 function processMod(stats, json) {
 	return new Promise(function(resolve, reject) {
 		var mod = new Mod(json.author);
+		mod.type = json.type;
 		mod.forum_url = "https://forum.minetest.net/viewtopic.php?t=" + json.topicId;
 		mod.extractInfoFromTitle(json.title);
 
 		getInfoFromModLink(stats, mod, json.link).then(function() {
 			var problem = mod.getFirstProblem();
 			if (problem) {
-				addModReason(stats, mod.author, json, problem);
+				addModReason(stats, mod.author, mod, problem);
 				reject(problem);
 			} else {
 				addSuccess(stats, mod.author, mod);
@@ -112,20 +113,35 @@ function processAllMods(stats, json_array) {
 	return new Promise(function(resolve, reject) {
 		var waiting_for = 0;
 		var res = [];
-		for (var i = 0; i < json_array.length && i < 10; i++) {
-			waiting_for++;
-			processMod(stats, json_array[i]).then(function(mod) {
-				console.log("done");
-				res.push(mod.toPlainDictionary());
-				waiting_for--;
-			}).catch(function(e) {
-				console.log("failed: " + e);
-				waiting_for--;
-			})
-		}
+		var idx = 0;
+
 		var int_id = setInterval(function() {
+			var num_spawned = 0;
+			for (var i = 0; i < 100 && idx + i < json_array.length && waiting_for < 100; i++) {
+				waiting_for++;
+				processMod(stats, json_array[i]).then(function(mod) {
+					console.log("done");
+					var obj = mod.toPlainDictionary();
+					obj.score = mod.getScore();
+					res.push(obj);
+					waiting_for--;
+				}).catch(function(e) {
+					stats.errors[e] = (stats.errors[e] != null) ? (stats.errors[e] + 1) : 1;
+					console.log("failed: " + e);
+					waiting_for--;
+				});
+				num_spawned++;
+				idx++;
+			}
+
+			console.log("Waiting for " + waiting_for + " (spawned " + num_spawned + ")");
 			if (waiting_for == 0) {
 				clearInterval(int_id);
+				for (var i = 0; i < reposervers.length; i++) {
+					reposervers[i].saveCache();
+					console.log(reposervers[i].hits +" hits and " + reposervers[i].misses + " misses");
+				}
+
 				resolve(res);
 			}
 		}, 500);
