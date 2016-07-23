@@ -18,10 +18,20 @@
 
 <ul>
 {% for mod in mods %}
-	<li class="{% if mod.msg != "added" %}wrong{% else %}right{% endif %}">
-		<a href="{{ mod.forum_url }}">{{ mod.title }}</a><br />
-		{{ mod.msg }}
-	</li>
+	{% if mod.msg != "added" %}
+		<li class="wrong">
+			<a href="{{ mod.forum_url }}">{{ mod.title }}</a><br />
+			{{ mod.msg }}
+		</li>
+	{% endif %}
+{% endfor %}
+{% for mod in mods %}
+	{% if mod.msg == "added" %}
+		<li class="right">
+			<a href="{{ mod.forum_url }}">{{ mod.title }}</a><br />
+			added
+		</li>
+	{% endif %}
 {% endfor %}
 </ul>
 
