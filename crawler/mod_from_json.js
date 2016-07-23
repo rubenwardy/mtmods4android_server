@@ -92,22 +92,38 @@ function processMod(stats, json) {
 		mod.forum_url = "https://forum.minetest.net/viewtopic.php?t=" + json.topicId;
 		mod.extractInfoFromTitle(json.title);
 
-		getInfoFromModLink(stats, mod, json.link).then(function() {
-			var problem = mod.getFirstProblem();
-			if (problem) {
-				addModReason(stats, mod.author, mod, problem);
-				reject(problem);
-			} else {
-				if (mod.download_link.indexOf(mod.basename) < 0) {
-					stats.c_potwrong++;
+		var bn_or = basename_override[json.link];
+		if (bn_or) {
+			console.log("Overriding basename to " + bn_or)
+			mod.basename = bn_or;
+		}
+
+		if (linkIsBlacklisted(json.link)) {
+			addModReason(stats, mod.author, mod, "download link is blacklisted");
+			reject("download link is blacklisted");
+		} else {
+			getInfoFromModLink(stats, mod, json.link).then(function() {
+				if (linkIsBlacklisted(json.link)) {
+					addModReason(stats, mod.author, mod, "download link is blacklisted");
+					reject("download link is blacklisted");
+				} else {
+					var problem = mod.getFirstProblem();
+					if (problem) {
+						addModReason(stats, mod.author, mod, problem);
+						reject(problem);
+					} else {
+						if (mod.download_link.indexOf(mod.basename) < 0) {
+							stats.c_potwrong++;
+						}
+						addSuccess(stats, mod.author, mod);
+						resolve(mod);
+					}
 				}
-				addSuccess(stats, mod.author, mod);
-				resolve(mod);
-			}
-		}).catch(function(e) {
-			addModReason(stats, mod.author, json, e);
-			reject(e);
-		})
+			}).catch(function(e) {
+				addModReason(stats, mod.author, mod, e);
+				reject(e);
+			});
+		}
 	});
 }
 
@@ -119,9 +135,9 @@ function processAllMods(stats, json_array) {
 
 		var int_id = setInterval(function() {
 			var num_spawned = 0;
-			for (var i = 0; i < 100 && idx + i < json_array.length && waiting_for < 100; i++) {
+			for (var i = 0; i < 100 && idx < json_array.length && waiting_for < 100; i++) {
 				waiting_for++;
-				processMod(stats, json_array[i]).then(function(mod) {
+				processMod(stats, json_array[idx]).then(function(mod) {
 					console.log("done");
 					var obj = mod.toPlainDictionary();
 					obj.score = mod.getScore();

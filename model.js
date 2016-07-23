@@ -27,7 +27,7 @@ function getList() {
 		res = getListNoReports();
 	    for (var i = 0; i < res.length; i++) {
 	        var mod = res[i];
-	        var idx = mod.author + "/" + mod.name;
+	        var idx = mod.author + "/" + mod.basename;
 	        var reps = reports[idx];
 	        if (reps) {
 	            mod.reports = {};
@@ -62,7 +62,7 @@ function getOldList() {
 		res = getOldListNoReports();
 	    for (var i = 0; i < res.length; i++) {
 	        var mod = res[i];
-	        var idx = mod.author + "/" + mod.name;
+	        var idx = mod.author + "/" + mod.basename;
 	        var reps = reports[idx];
 	        if (reps) {
 	            mod.reports = {};
@@ -95,7 +95,7 @@ function getMod(modname) {
 		var mod = list[i];
 		if (
 					(is_id && i == modname) ||
-					(!is_id && mod.name == modname)
+					(!is_id && mod.basename == modname)
 				) {
 			mod.id = i;
 			memCache.put("mod_" + modname, mod, cacheTime);
@@ -117,7 +117,7 @@ function getPopularMods()
 		for (var i = 0; i < res.length; i++) {
 			var mod = res[i];
 			mod.downloads = 0;
-			lookup[mod.author + "/" + mod.name] = mod;
+			lookup[mod.author + "/" + mod.basename] = mod;
 		}
 
 		var lines = fs.readFileSync("downloads.txt", 'utf8').split("\n");

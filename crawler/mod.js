@@ -14,6 +14,8 @@ class Mod {
 	}
 
 	extractInfoFromTitle(title) {
+		this.title = title;
+
 		// Get modname
 		var re = /\[(.+?)\]/g;
 		var basename = null;
@@ -71,7 +73,7 @@ class Mod {
 	}
 
 	getScore() {
-		return 0;
+		return (this.description.length > 5) ? 5 : 0;
 	}
 }
 

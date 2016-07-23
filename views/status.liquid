@@ -19,7 +19,7 @@
 <ul>
 {% for mod in mods %}
 	<li class="{% if mod.msg != "added" %}wrong{% else %}right{% endif %}">
-		<a href="https://forum.minetest.net/viewtopic.php?t={{ mod.topicId }}">{{ mod.title }}</a><br />
+		<a href="{{ mod.forum_url }}">{{ mod.title }}</a><br />
 		{{ mod.msg }}
 	</li>
 {% endfor %}

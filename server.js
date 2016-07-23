@@ -56,14 +56,14 @@ app.get('/mods', function (req, res) {
             var mod = list[i];
             ret.push({
                 id: i,
-                title: mod.title || mod.name,
-                basename: mod.name,
+                title: mod.title || mod.basename,
+                basename: mod.basename,
                 author: mod.author,
                 value: 0,
                 version_set: [{
                     id: 0,
                     date: 0,
-                    file: "download/" + mod.author + "/" + mod.name + "/"
+                    file: "download/" + mod.author + "/" + mod.basename + "/"
                 }]
             });
         }
@@ -79,7 +79,7 @@ app.get('/mods', function (req, res) {
         } else {
             for (var i = 0; i < tmp.length; i++) {
                 var mod = tmp[i];
-                if (mod.name.indexOf(q) >= 0 || mod.author.indexOf(q) >= 0 ||
+                if (mod.basename.indexOf(q) >= 0 || mod.author.indexOf(q) >= 0 ||
                         mod.title.indexOf(q) >= 0 ||
                         (mod.description && mod.description.indexOf(q) >= 0)) {
                     mods.push(mod);
@@ -105,8 +105,8 @@ app.get('/mod/:modname', function (req, res) {
     if (mod != null && mod.id >= 0) {
         res.send({
             id: mod.id,
-            title: mod.title || mod.name,
-            basename: mod.name,
+            title: mod.title || mod.basename,
+            basename: mod.basename,
             desc: mod.description || "",
             author: {
                 id: 0,
@@ -122,9 +122,9 @@ app.get('/mod/:modname', function (req, res) {
             version_set: [{
                 id: 0,
                 date: 0,
-                file: "download/" + mod.author + "/" + mod.name + "/"
+                file: "download/" + mod.author + "/" + mod.basename + "/"
             }],
-            download_url: "download/" + mod.author + "/" + mod.name + "/"
+            download_url: "download/" + mod.author + "/" + mod.basename + "/"
         });
     } else {
         console.log(req.originalUrl);

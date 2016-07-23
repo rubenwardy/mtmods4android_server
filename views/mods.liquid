@@ -15,12 +15,12 @@
 <ul>
 {% for mod in mods %}
 	<li>
-		<a href="https://forum.minetest.net/viewtopic.php?t={{ mod.topicId }}">{{ mod.title }}</a> by {{ mod.author }}<br />
+		<a href="{{ mod.forum_url }}">{{ mod.title }}</a> [{{ mod.basename }}] by {{ mod.author }}<br />
 		<p>
 			{{ mod.description | truncate: 100, '…' }}
 		</p>
-		<a href="{{ mod.link }}">Download</a> |
-		<a href="https://forum.minetest.net/viewtopic.php?t={{ mod.topicId }}">Forum Topic</a> |
+		<a href="{{ mod.download_link }}">Download</a> |
+		<a href="{{ mod.forum_url }}">Forum Topic</a> |
 		<a href="/status/?a={{ mod.author }}">{{ mod.author }}'s mods</a>
 	</li>
 {% endfor %}

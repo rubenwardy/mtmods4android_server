@@ -1,4 +1,4 @@
 {
-	"github.com/rubenwardy/food/": "food",
-	"github.com/rubenwardy/aliases": "cmd_aliases"
+	"https://github.com/rubenwardy/food": "food",
+	"https://github.com/rubenwardy/aliases": "cmd_aliases"
 }
