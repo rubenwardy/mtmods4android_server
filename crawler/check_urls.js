@@ -24,19 +24,19 @@ function make_head_request(item) {
 		item.follows++;
 	} else {
 		item.follows = 0;
-		item.orig = item.link;
+		item.orig = item.download_link;
 	}
 
 	var et = cachefile[item.orig];
 	if (et) {
 		return false;
 	}
-	console.log("Polling " + item.link + " for " + item.author + "/" + item.name);
+	console.log("Polling " + item.download_link + " for " + item.author + "/" + item.name);
 
 	running++;
 
 	try {
-		var options = url.parse(item.link);
+		var options = url.parse(item.download_link);
 		options.method = "HEAD";
 		options.rejectUnauthorized = false;
 		var ht = http;
@@ -54,14 +54,14 @@ function make_head_request(item) {
 					res.abort();
 					return;
 				}
-				console.log(item.link + " -> " + res.headers.location);
-				item.link = res.headers.location;
+				console.log(item.download_link + " -> " + res.headers.location);
+				item.download_link = res.headers.location;
 				make_head_request(item);
 			} else if (res.statusCode == 405) {
 				make_get_request(item);
 			} else {
 				var size = res.headers["content-length"];
-				console.log(item.link + "\t" + res.statusCode + "\t" + res.headers["content-type"]);
+				console.log(item.download_link + "\t" + res.statusCode + "\t" + res.headers["content-type"]);
 				console.log(item.orig);
 
 				if (
@@ -91,7 +91,7 @@ function make_get_request(item) {
 	running++;
 
 	try {
-		var options = url.parse(item.link);
+		var options = url.parse(item.download_link);
 		options.rejectUnauthorized = false;
 		var ht = http;
 		if (options.protocol && options.protocol.indexOf("https") >= 0) {
@@ -107,8 +107,8 @@ function make_get_request(item) {
 					res.abort();
 					return;
 				} else {
-					console.log(item.link + " -> " + res.headers.location);
-					item.link = res.headers.location;
+					console.log(item.download_link + " -> " + res.headers.location);
+					item.download_link = res.headers.location;
 					make_get_request(item);
 				}
 			} else {
@@ -117,7 +117,7 @@ function make_get_request(item) {
 					size += data.length;
 				});
 				res.on("end", function() {
-					console.log(item.link + "\t" + res.statusCode + "\t" + res.headers["content-type"]);
+					console.log(item.download_link + "\t" + res.statusCode + "\t" + res.headers["content-type"]);
 					console.log(item.orig);
 
 					if (
@@ -152,7 +152,7 @@ function add_url(item, status, size, no_rec) {
 		cachefile[item.orig] = {
 			status: Number(status),
 			timestamp: new Date().getTime(),
-			final_url: item.link,
+			final_url: item.download_link,
 			size: Number(size)
 		};
 	}

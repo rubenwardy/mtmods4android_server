@@ -7,6 +7,7 @@ class Mod {
 		this.description = "";
 		this.forum_url = null;
 		this.download_link = null;
+		this.download_size = -1;
 
 		this.repo_host = null;
 		this.repo = null;

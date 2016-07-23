@@ -80,6 +80,19 @@ function getInfoFromModLink(stats, mod, link) {
 				return;
 			}
 		}
+
+		var url_cache = url_cachefile[link];
+		if (url_cache) {
+			if (url_cache.status == 200) {
+				this.download_size = url_cache.size;
+			} else if (url_cache.status == -1) {
+				reject("download does not result in zip file");
+				return;
+			} else {
+				reject("download does not lead to an existent URL");
+				return;
+			}
+		}
 		mod.download_link = link;
 		resolve();
 	});
@@ -94,7 +107,6 @@ function processMod(stats, json) {
 
 		var bn_or = basename_override[json.link];
 		if (bn_or) {
-			console.log("Overriding basename to " + bn_or)
 			mod.basename = bn_or;
 		}
 
@@ -138,7 +150,6 @@ function processAllMods(stats, json_array) {
 			for (var i = 0; i < 100 && idx < json_array.length && waiting_for < 100; i++) {
 				waiting_for++;
 				processMod(stats, json_array[idx]).then(function(mod) {
-					console.log("done");
 					var obj = mod.toPlainDictionary();
 					obj.score = mod.getScore();
 					res.push(obj);

@@ -108,7 +108,6 @@ class GithubRepoServer extends RepoServer {
 			var cached = me.cache[idx];
 			if (cached && cached.desc) {
 				me.hits++;
-				console.log("Cache hit");
 				resolve(cached.desc.text);
 			} else {
 				me.misses++;
@@ -184,7 +183,6 @@ class GithubRepoServer extends RepoServer {
 			var cached = me.cache[idx];
 			if (cached && cached.download) {
 				me.hits++;
-				console.log("Cache hit for download");
 				resolve({
 					link: cached.download.link,
 					commit: cached.download.sha
@@ -200,7 +198,6 @@ class GithubRepoServer extends RepoServer {
 					req.sha = branch;
 				}
 				me.github.repos.getCommits(req).then(function(res) {
-					console.log(res);
 					if (res && res.length == 1) {
 						var sha = res[0].sha;
 						if (!cached) {
