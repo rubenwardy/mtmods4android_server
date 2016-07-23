@@ -171,6 +171,8 @@ function report(res) {
 
 module.exports = {
 	report: report,
+	getOldList: getOldList,
+	getOldListNoReports: getOldListNoReports,
 	getList: getList,
 	getListNoReports: getListNoReports,
 	getMod: getMod,
