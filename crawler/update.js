@@ -127,15 +127,16 @@ http.get(url, function(res) {
 			var text2 = JSON.stringify(stats.out_errors);
 			fs.writeFileSync(settings.lookupfile, text2);
 
-			var not_added = (stats.c_lm + stats.c_a + stats.c_lb + stats.c_wt + stats.c_b + stats.c_link_error);
 			console.log("Wrote " + ret.length + " entries to file.");
 			console.log((stats.total - ret.length) + " out of " + stats.total + " entries weren't added.");
-			console.log(" - " + not_added + " had errors");
+			var esum = 0;
 			for (var key in stats.errors) {
 				if (stats.errors.hasOwnProperty(key)) {
 					console.log(" - " + stats.errors[key] + " " + key);
+					esum += stats.errors[key];
 				}
 			}
+			console.log(" - " + (stats.total - ret.length - esum)  + " unknown errors.");
 			// console.log(" - " + stats.c_wt + " were not mods or modpacks in mod releases.");
 			// console.log(" - " + stats.c_a + " had no author.");
 			// console.log(" - " + stats.c_b + " failed to find a mod name / basename in their title.");
@@ -144,7 +145,7 @@ http.get(url, function(res) {
 			// console.log(" - " + stats.c_link_error + " had 404 or wrong content-type downloads.");
 			console.log("Out of the added entries:");
 			console.log(" - " + stats.c_ver + " were verified/trusted.");
-			console.log(" - " + (stats.total - not_added - stats.c_ver) + " were non-verified/untrusted.");
+			// console.log(" - " + (stats.total - not_added - stats.c_ver) + " were non-verified/untrusted.");
 			console.log(" - " + stats.c_potwrong + " had downloads which didn't mention the modname.");
 			var sum = 0;
 			for (var key in stats.source) {

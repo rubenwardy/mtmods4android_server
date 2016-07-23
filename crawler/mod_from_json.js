@@ -2,7 +2,6 @@ var fs = require('fs');
 var Mod = require("./mod");
 var RepoServers = require('./reposervers');
 var basename_override = JSON.parse(fs.readFileSync("data/basename_override.json", 'utf8'));
-var db = JSON.parse(fs.readFileSync("data/db.json", 'utf8'));
 var url_cachefile = JSON.parse(fs.readFileSync("data/url_result_cache.json", 'utf8'));
 
 // Blacklists and verified lists
@@ -99,6 +98,9 @@ function processMod(stats, json) {
 				addModReason(stats, mod.author, mod, problem);
 				reject(problem);
 			} else {
+				if (mod.download_link.indexOf(mod.basename) < 0) {
+					stats.c_potwrong++;
+				}
 				addSuccess(stats, mod.author, mod);
 				resolve(mod);
 			}

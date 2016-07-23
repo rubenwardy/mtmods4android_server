@@ -66,7 +66,7 @@ class GithubRepoServer extends RepoServer {
 		        "user-agent": "MtMods4Android Server" // GitHub is happy with a unique user agent
 		    },
 		    Promise: Promise,
-		    followRedirects: false, // default: true; there's currently an issue with non-get redirects, so allow ability to disable follow-redirects
+		    followRedirects: true, // default: true; there's currently an issue with non-get redirects, so allow ability to disable follow-redirects
 		    timeout: 5000
 		});
 
@@ -99,9 +99,6 @@ class GithubRepoServer extends RepoServer {
 	}
 
 	getDescriptionFromRepo(repo) {
-
-
-
 		if (!this.github) {
 			this.connect();
 		}
