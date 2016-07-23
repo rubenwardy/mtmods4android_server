@@ -4,6 +4,10 @@ class RepoServer {
 	// Returns tupple: user, repo. Returns immediately
 	getRepoFromURL(url) { return null; }
 
+	connect() { return false; }
+
+	getRepoURL(repo) { return null; }
+
 	// Returns a promise which will give you a description on completion
 	getDescriptionFromRepo(repo) { return null; }
 
@@ -44,6 +48,8 @@ class GithubRepoServer extends RepoServer {
 		    type: "oauth",
 		    token: settings.github_auth
 		});
+
+		return true;
 	}
 
 	getRepoFromURL(link) {
@@ -60,6 +66,10 @@ class GithubRepoServer extends RepoServer {
 			console.log("failed to compile");
 		}
 		return null;
+	}
+
+	getRepoURL(repo) {
+		return "https://github.com/" + repo.user + "/" + repo.repo + ".git";
 	}
 
 	getDescriptionFromRepo(repo) {
@@ -103,51 +113,54 @@ class GithubRepoServer extends RepoServer {
 	}
 
 	getDownloadAndHash(repo, branch) {
+		if (!this.github) {
+			this.connect();
+		}
 		var me = this;
 		return new Promise(function (resolve, reject) {
-			if (me.github) {
-				var req = {
-					user: repo.user,
-					repo: repo.repo,
-					per_page: 1
-				};
-				if (branch) {
-					req.sha = branch;
-				}
-				me.github.repos.getCommits(req).then(function(res) {
-					console.log(res);
-					if (res && res.length == 1) {
-						var sha = res[0].sha;
-						resolve({
-							link: "https://github.com/" + repo.user + "/" + repo.repo + "/archive/" + sha + ".zip",
-							commit: sha
-						});
-					} else {
-						reject();
-					}
-				});
-			} else {
-				console.log("Not connected to github yet");
-				reject();
+			var req = {
+				user: repo.user,
+				repo: repo.repo,
+				per_page: 1
+			};
+			if (branch) {
+				req.sha = branch;
 			}
+			me.github.repos.getCommits(req).then(function(res) {
+				console.log(res);
+				if (res && res.length == 1) {
+					var sha = res[0].sha;
+					resolve({
+						link: "https://github.com/" + repo.user + "/" + repo.repo + "/archive/" + sha + ".zip",
+						commit: sha
+					});
+				} else {
+					reject();
+				}
+			});
 		})
 
 	}
 }
 
-var reposerver = new GithubRepoServer();
-var repo = reposerver.getRepoFromURL("https://github.com/rubenwardy/awards.git");
-if (repo) {
-	console.log("'" + repo.user + "' '" + repo.repo + "'");
-	reposerver.connect();
-	reposerver.getDownloadAndHash(repo, null).then(function(res) {
-		var link = res.link;
-		var commit = res.commit;
-		console.log(link + " " + commit);
-	});
-	reposerver.getDescriptionFromRepo(repo).then(function(desc) {
-		console.log("description: " + desc);
-	});
-} else {
-	console.log("Repo not from github");
+// var reposerver = new GithubRepoServer();
+// var repo = reposerver.getRepoFromURL("https://github.com/rubenwardy/awards.git");
+// if (repo) {
+// 	console.log("'" + repo.user + "' '" + repo.repo + "'");
+// 	reposerver.connect();
+// 	reposerver.getDownloadAndHash(repo, null).then(function(res) {
+// 		var link = res.link;
+// 		var commit = res.commit;
+// 		console.log(link + " " + commit);
+// 	});
+// 	reposerver.getDescriptionFromRepo(repo).then(function(desc) {
+// 		console.log("description: " + desc);
+// 	});
+// } else {
+// 	console.log("Repo not from github");
+// }
+
+module.exports =  {
+	RepoServer: RepoServer,
+	GithubRepoServer: GithubRepoServer
 }

@@ -10,17 +10,7 @@ if (!String.prototype.format) {
 	};
 }
 
-var fs = require('fs');
-var link_blacklist = JSON.parse(fs.readFileSync("data/blacklist.json", 'utf8'));
-var link_verified = JSON.parse(fs.readFileSync("data/verified.json", 'utf8'));
-var basename_override = JSON.parse(fs.readFileSync("data/basename_override.json", 'utf8'));
-var db = JSON.parse(fs.readFileSync("data/db.json", 'utf8'));
-var url_cachefile = JSON.parse(fs.readFileSync("data/url_result_cache.json", 'utf8'));
-var settings = JSON.parse(fs.readFileSync("settings.json", 'utf8'));
-var min_size=  0;
-
 var sort_by;
-
 (function() {
     // utility functions
     var default_cmp = function(a, b) {
@@ -86,7 +76,36 @@ var sort_by;
     }
 }());
 
-var longest = "";
+var fs = require('fs');
+var RepoServers = require('./reposervers');
+
+// Settings
+var settings = JSON.parse(fs.readFileSync("settings.json", 'utf8'));
+var basename_override = JSON.parse(fs.readFileSync("data/basename_override.json", 'utf8'));
+var db = JSON.parse(fs.readFileSync("data/db.json", 'utf8'));
+var url_cachefile = JSON.parse(fs.readFileSync("data/url_result_cache.json", 'utf8'));
+
+// Blacklists and verified lists
+var link_blacklist = JSON.parse(fs.readFileSync("data/blacklist.json", 'utf8'));
+var link_verified = JSON.parse(fs.readFileSync("data/verified.json", 'utf8'));
+function linkIsBlacklisted(link) {
+	for (var j = 0; j < link_blacklist.length; j++) {
+		if (link.indexOf(link_blacklist[j]) >= 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function linkIsVerified(link) {
+	for (var j = 0; j < link_verified.length; j++) {
+		if (link.indexOf(link_blacklist[j]) >= 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
 
 var http = require("http");
 var url = "http://krock-works.16mb.com/MTstuff/modList.php";
@@ -104,6 +123,9 @@ http.get(url, function(res) {
 		if (!resp)
 			return;
 
+		// Stats
+		var min_size =  0;
+		var longest = "";
 		var c_lm = 0;
 		var c_lb = 0;
 		var c_wt = 0;
@@ -141,107 +163,78 @@ http.get(url, function(res) {
 			res.msg = reason;
 			addMod(author, res);
 		}
+
 		function addSuccess(author, mod) {
 			addModReason(author, mod, "added");
 		}
 
-		for (var i = 0; i < total; i++) {
-			var mod = resp[i];
+		var reposervers = [];
+		reposervers.push(new (RepoServers.GithubRepoServer)());
 
-
-						if (mod.description) {
-							if (mod.description.length > min_size) {
-								min_size = mod.description.length;
-								longest = mod.description;
-							}
-						}
+		function processMod(mod) {
+			if (mod.description) {
+				if (mod.description.length > min_size) {
+					min_size = mod.description.length;
+					longest = mod.description;
+				}
+			}
 
 			mod.score = 0;
 
 			// Check mod author
 			if (!mod.author || mod.author == "") {
 				c_a++;
-				continue;
+				return false;
 			}
 
 			// Check mod type
 			if (!mod.type || !(mod.type == "1" || mod.type == "2")) {
 				addModReason(mod.author, mod, "Not in Mod Releases");
 				c_wt++;
-				continue;
+				return false;
 			}
 
 			// Check mod link
 			if (!mod.link || mod.link == "") {
 				addModReason(mod.author, mod, "No download link");
 				c_lm++;
-				continue;
+				return false;
 			}
 
 			// Check link for black list
 			mod.link = mod.link.trim();
-			var blacklisted = false;
-			for (var j = 0; j < link_blacklist.length; j++) {
-				if (mod.link.indexOf(link_blacklist[j]) >= 0) {
-					blacklisted = true;
-					break;
-				}
-			}
-			if (blacklisted) {
+			if (linkIsBlacklisted(mod.link)) {
 				addModReason(mod.author, mod, "Download link is in blacklist");
 				c_lb++;
-				continue;
+				return false;
 			}
-
-			var filters = [
-				{re: /github.com\/([\w-]+)\/([\w-]+)/g,    out: "https://github.com/{0}/{1}/archive/master.zip"},
-				{re: /bitbucket.org\/([\w-]+)\/([\w-]+)/g, out: "https://bitbucket.org/{0}/{1}/get/master.zip"},
-				{re: /repo.or.cz\/([\w-]+)\/([\w-]+)/g,    out: "http://repo.or.cz/{0}/{1}.git/snapshot/master.zip"},
-				{re: /notabug.org\/([\w-]+)\/([\w-]+)/g,    out: "https://notabug.org/{0}/{1}/archive/master.zip"},
-			];
 
 			if (mod.link.toLowerCase().indexOf("github.com") >= 0) {
 				c_github++;
 			}
 
-			mod.link = (function(link) {
-				function findTwo(link, re) {
-					if (!re) {
-						console.log("failed to compile");
-						return null, null;
-					}
-					var m = re.exec(link);
-					if (m) {
-						return [m[1], m[2]];
-					}
-					return [null, null]
+			for (var i = 0; i < reposervers.length; i++) {
+				var reposerver = reposervers[i];
+				var repo = reposerver.getRepoFromURL(mod.link);
+				if (repo) {
+					mod.pending = (mod.pending) ? mod.pending + 1 : 1;
+					mod.link = undefined;
+					mod.repo = reposerver.getRepoURL(repo);
+					reposerver.getDownloadAndHash(repo, null).then(function(res) {
+						mod.pending--;
+						var link = res.link;
+						var commit = res.commit;
+						mod.link = link;
+						mod.commit_sha = commit;
+
+						if (linkIsBlacklisted(mod.link)) {
+							addModReason(mod.author, mod, "Download link is in blacklist");
+							c_lb++;
+						}
+					}).catch(function(e) {
+						mod.pending--;
+					})
 				}
-				for (var i = 0; i < filters.length; i++) {
-					var fil = filters[i];
-					var ret = findTwo(link, fil.re);
-					var author = ret[0];
-					var repo = ret[1];
-					if (author && repo) {
-						return fil.out.format(author, repo);
-					}
-				}
-
-				return link;
-
-			})(mod.link);
-
-
-			var blacklisted = false;
-			for (var j = 0; j < link_blacklist.length; j++) {
-				if (mod.link.indexOf(link_blacklist[j]) >= 0) {
-					blacklisted = true;
-					break;
-				}
-			}
-			if (blacklisted) {
-				addModReason(mod.author, mod, "Download link is in blacklist");
-				c_lb++;
-				continue;
 			}
 
 			// Get modname
@@ -265,19 +258,19 @@ http.get(url, function(res) {
 				}
 			} while (m);
 
-			for (var key in basename_override) {
-				if (basename_override.hasOwnProperty(key) && mod.link.indexOf(key) >= 0) {
-					console.log("Overriding " + key + " -> " + basename_override[key]);
-					basename = basename_override[key];
-					break;
-				}
-			}
+			// for (var key in basename_override) {
+			// 	if (basename_override.hasOwnProperty(key) && mod.link.indexOf(key) >= 0) {
+			// 		console.log("Overriding " + key + " -> " + basename_override[key]);
+			// 		basename = basename_override[key];
+			// 		break;
+			// 	}
+			// }
 
 			// Check modname/basename
 			if (basename == null) {
 				addModReason(mod.author, mod, "Unable to detect modname");
 				c_b++;
-				continue;
+				return false;
 			}
 			mod.name = basename.toLowerCase();
 			mod.verified = 0;
@@ -287,48 +280,48 @@ http.get(url, function(res) {
 				.replace("  ", " ").replace("  ", " ").replace("&#58;", ":")
 				.replace("&#39;", "'").trim()
 
-			var et = url_cachefile[mod.link];
-			if (et) {
-				if (et.status != 200) {
-					if (et.status == -1) {
-						addModReason(mod.author, mod, "Bad download link: wrong content-type");
-					} else {
-						addModReason(mod.author, mod, "Bad download link: " + et.status);
-					}
-					c_link_error++;
-					if (settings.debugout != "") {
-						fs.appendFileSync(settings.debugout + "/link_error.txt",
-							mod.author + "/" + mod.name + "\t" + mod.link + "\t" + et.status + "\n");
-					}
-					continue;
-				}
-				mod.size = et.size;
-			} else {
-				console.log("No url_cache for " + mod.link);
-			}
+			// var et = url_cachefile[mod.link];
+			// if (et) {
+			// 	if (et.status != 200) {
+			// 		if (et.status == -1) {
+			// 			addModReason(mod.author, mod, "Bad download link: wrong content-type");
+			// 		} else {
+			// 			addModReason(mod.author, mod, "Bad download link: " + et.status);
+			// 		}
+			// 		c_link_error++;
+			// 		if (settings.debugout != "") {
+			// 			fs.appendFileSync(settings.debugout + "/link_error.txt",
+			// 				mod.author + "/" + mod.name + "\t" + mod.link + "\t" + et.status + "\n");
+			// 		}
+			// 		return false;
+			// 	}
+			// 	mod.size = et.size;
+			// } else {
+			// 	console.log("No url_cache for " + mod.link);
+			// }
 
 			// Check for verified
-			var verified = false;
-			for (var j = 0; j < link_verified.length; j++) {
-				if (mod.link.toLowerCase().indexOf(link_verified[j]) == 0) {
-					verified = true;
-					break;
-				}
-			}
-			if (verified) {
-				mod.score += 10;
-				c_ver++;
-				mod.verified = 1;
-			} else if (settings.debugout != "") {
-				fs.appendFileSync(settings.debugout + "/not_verified.txt", mod.name + "\t" + mod.link + "\n");
-			}
+			// var verified = false;
+			// for (var j = 0; j < link_verified.length; j++) {
+			// 	if (mod.link.toLowerCase().indexOf(link_verified[j]) == 0) {
+			// 		verified = true;
+			// 		break;
+			// 	}
+			// }
+			// if (verified) {
+			// 	mod.score += 10;
+			// 	c_ver++;
+			// 	mod.verified = 1;
+			// } else if (settings.debugout != "") {
+			// 	fs.appendFileSync(settings.debugout + "/not_verified.txt", mod.name + "\t" + mod.link + "\n");
+			// }
 
-			if (mod.link.toLowerCase().indexOf(mod.name.toLowerCase()) < 0) {
-				c_potwrong++;
-				if (settings.debugout != "") {
-					fs.appendFileSync(settings.debugout + "/potwrong.txt", mod.author + "/" + mod.name + "\t" + mod.link + "\n");
-				}
-			}
+			// if (mod.link.toLowerCase().indexOf(mod.name.toLowerCase()) < 0) {
+			// 	c_potwrong++;
+			// 	if (settings.debugout != "") {
+			// 		fs.appendFileSync(settings.debugout + "/potwrong.txt", mod.author + "/" + mod.name + "\t" + mod.link + "\n");
+			// 	}
+			// }
 
 			// Adjust from DB
 			var row = db[mod.author.toLowerCase() + "/" + mod.name.toLowerCase()];
@@ -353,6 +346,12 @@ http.get(url, function(res) {
 			addSuccess(mod.author, mod);
 
 			ret.push(mod);
+
+			return true;
+		}
+
+		for (var i = 0; i < total; i++) {
+			processMod(resp[i]);
 		}
 
 		console.log("Sorting...");
