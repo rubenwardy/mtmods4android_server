@@ -112,7 +112,7 @@ app.get('/mod/:modname', function (req, res) {
                 id: 0,
                 username: mod.author
             },
-            replink: mod.link,
+            replink: mod.download_link,
             depends: mod.depends || [],
             softdep: mod.soft_depends || [],
             value: 0,
@@ -138,8 +138,8 @@ app.get("/download/:author/:modname", function(req, res) {
     var mod = model.getMod(modname);
 
     if (mod) {
-        console.log("Redirecting to download at " + mod.link);
-        res.redirect(mod.link);
+        console.log("Redirecting to download at " + mod.download_link);
+        res.redirect(mod.download_link);
     } else {
         res.status(404).send('Not found');
     }
