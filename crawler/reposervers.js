@@ -1,28 +1,35 @@
 "esversion: 6";
 
 class RepoServer {
+	getServerName() {}
+
 	// Returns tupple: user, repo. Returns immediately
-	getRepoFromURL(url) { return null; }
+	getRepoFromURL(url) {}
 
-	connect() { return false; }
+	connect() {}
 
-	getRepoURL(repo) { return null; }
+	getRepoURL(repo) {}
 
 	// Returns a promise which will give you a description on completion
-	getDescriptionFromRepo(repo) { return null; }
+	getDescriptionFromRepo(repo) {}
 
 	// Returns a promise which will give you depends.txt on completion
-	getDependsFromRepo(repo) { return null; }
+	getDependsFromRepo(repo) {}
 
 	// Returns a promise which will give you a tuple: download link and hash
-	getDownloadAndHash(repo, branch) { return null; }
+	getDownloadAndHash(repo, branch) {}
 }
 
 var fs = require('fs');
 var Promise = require('bluebird');
 var settings = JSON.parse(fs.readFileSync("settings.json", 'utf8'));
 
+
 class GithubRepoServer extends RepoServer {
+	getServerName() {
+		return "github.com"
+	}
+
 	constructor() {
 		super();
 		this.github = null;
