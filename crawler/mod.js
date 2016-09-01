@@ -42,6 +42,10 @@ class Mod {
 			this.title = title.replace("[" + basename + "]", "")
 				.replace("  ", " ").replace("  ", " ").replace("&#58;", ":")
 				.replace("&#39;", "'").trim();
+
+			if (!this.title || this.title == "") {
+				this.title = this.basename;
+			}
 		}
 	}
 
