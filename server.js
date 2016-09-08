@@ -150,15 +150,13 @@ app.get("/screenshot/:author/:modname", function(req, res) {
     var modname = req.params.modname;
     var mod = model.getMod(modname);
 
-    if (mod) {
-    	if (mod.repo_host == "github") {
-            var url = "https://raw.githubusercontent.com/" + mod.repo_author + "/" + mod.repo_name + "/master/screenshot.png";
-            console.log("Redirecting to screenshot at " + url);
-            res.redirect(url);
-        }
+    if (mod && mod.repo_host == "github") {
+        var url = "https://raw.githubusercontent.com/" + mod.repo_author + "/" + mod.repo_name + "/master/screenshot.png";
+        console.log("Redirecting to screenshot at " + url);
+        res.redirect(url);
+    } else {
+        res.status(404).send("Not found");
     }
-
-    res.status(404).send("Not found");
 });
 
 app.get('/blacklist', function (req, res) {
