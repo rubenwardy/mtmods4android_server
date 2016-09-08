@@ -150,7 +150,7 @@ app.get("/screenshot/:author/:modname", function(req, res) {
     var modname = req.params.modname;
     var mod = model.getMod(modname);
 
-    if (mod && mod.repo_host == "github") {
+    if (mod && mod.repo_host == "github.com") {
         var url = "https://raw.githubusercontent.com/" + mod.repo_author + "/" + mod.repo_name + "/master/screenshot.png";
         console.log("Redirecting to screenshot at " + url);
         res.redirect(url);
