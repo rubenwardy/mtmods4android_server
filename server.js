@@ -151,26 +151,10 @@ app.get("/screenshot/:author/:modname", function(req, res) {
     var mod = model.getMod(modname);
 
     if (mod) {
-    	function findTwo(link, re) {
-    		if (!re) {
-    			console.log("failed to compile");
-    			return null, null;
-    		}
-    		var m = re.exec(link);
-    		if (m) {
-    			return [m[1], m[2]];
-    		}
-    		return [null, null]
-    	}
-
-        var ret = findTwo(mod.link, /github.com\/([\w-]+)\/([\w-]+)/g);
-    	var author = ret[0];
-    	var repo = ret[1];
-    	if (author && repo) {
-            var url = "https://raw.githubusercontent.com/" + author + "/" + repo + "/master/screenshot.png";
+    	if (mod.repo_host == "github") {
+            var url = "https://raw.githubusercontent.com/" + mod.repo_author + "/" + mod.repo_name + "/master/screenshot.png";
             console.log("Redirecting to screenshot at " + url);
             res.redirect(url);
-            return;
         }
     }
 

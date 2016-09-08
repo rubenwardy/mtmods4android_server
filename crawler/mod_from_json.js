@@ -76,6 +76,8 @@ function getInfoFromModLink(stats, mod, link) {
 				stats.source[sname] = (cell) ? cell + 1 : 1
 				mod.repo_host = reposerver.getServerName();
 				mod.repo = reposerver.getRepoURL(repo);
+				mod.repo_author = repo.user;
+				mod.repo_name = repo.repo;
 				reposerver.getAllInfo(repo, mod).then(resolve).catch(reject);
 				return;
 			}
