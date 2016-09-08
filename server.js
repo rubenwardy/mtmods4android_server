@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var expressLiquid = require('express-liquid');
-var model = require('./model');
+var model = require('./common/model');
 var apicache = require('apicache').options({ debug: false }).middleware;
 
 var app = express();

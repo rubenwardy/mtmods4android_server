@@ -1,6 +1,6 @@
 var fs = require('fs');
-var Mod = require("./mod");
-var RepoServers = require('./reposervers');
+var Mod = require("./../common/mod");
+var RepoServers = require('./../common/reposervers');
 var basename_override = JSON.parse(fs.readFileSync("data/basename_override.json", 'utf8'));
 var url_cachefile = JSON.parse(fs.readFileSync("data/url_result_cache.json", 'utf8'));
 
