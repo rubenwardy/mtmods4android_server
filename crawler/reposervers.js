@@ -22,6 +22,9 @@ class RepoServer {
 
 	// Returns a promise which will give you a tuple: download link and hash
 	getDownloadAndHash(repo, branch) {}
+
+	// Registers a on change listener
+	registerListener(repo) {}
 }
 
 var fs = require('fs');
@@ -241,10 +244,45 @@ class GithubRepoServer extends RepoServer {
 				}).catch(function(e) {
 					resolve();
 				});
+
+				me.registerListener(repo).then(function(res) {
+					console.log("Registered repo!");
+					console.log(res);
+				}).catch(function(e) {
+					if (e) console.log(e);
+				});
 			}).catch(function(e) {
 				reject("unable to get download: " + e);
 			});
 			// reject("504: Gateway Timeout");
+		});
+	}
+
+	registerListener(repo) {
+		var me = this;
+		return new Promise(function(resolve, reject) {
+			var idx = repo.user + "/" + repo.repo;
+			var cached = me.cache[idx];
+			if (!cached) {
+				cached = {};
+				me.cache[idx] = cached;
+			} else if (cached.hook_registered) {
+				resolve();
+				return;
+			} else if (repo.user != "minetest-mods") {
+				reject();
+				return;
+			}
+
+			cached.hook_registered = true;
+			me.github.repos.createHook({
+				user: repo.user,
+				repo: repo.repo,
+				name: "web",
+				config: {
+					url: "http://app-mtmm.rubenwardy.com/v2/notify-mod-update"
+				}
+			}).then(resolve).catch(reject);
 		});
 	}
 }
