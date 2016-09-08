@@ -186,7 +186,6 @@ app.get('/verified', function (req, res) {
 });
 
 app.post('/v2/notify-mod-update', function(req, res) {
-    console.body(req.body.repository.full_name);
     if (req.body && req.body.repository && req.body.repository.full_name) {
         fs.appendFileSync("updates.txt", req.body.repository.full_nam + "\n");
         res.end("OK");
