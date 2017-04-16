@@ -167,7 +167,7 @@ app.get("/verified", function (req, res) {
 	res.render("verified", {title: "Verified", links: model.getVerified()});
 });
 
-app.push("/v2/notify-mod-update", function(req, res) {
+app.post("/v2/notify-mod-update", function(req, res) {
 	if (req.body && req.body.repository && req.body.repository.full_name) {
 		fs.appendFileSync("updates.txt", req.body.repository.full_nam + "\n");
 		res.send("OK");
