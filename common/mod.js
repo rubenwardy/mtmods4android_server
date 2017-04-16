@@ -38,7 +38,7 @@ class Mod {
 		} while (m);
 
 		if (basename) {
-			this.basename = basename.toLowerCase();
+			this.basename = basename.replace("minetest-mod-", "").toLowerCase();
 			this.title = title.replace("[" + basename + "]", "")
 				.replace("  ", " ").replace("  ", " ").replace("&#58;", ":")
 				.replace("&#39;", "'").trim();
