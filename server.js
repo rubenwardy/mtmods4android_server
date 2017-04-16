@@ -182,7 +182,7 @@ app.post("/v2/on-missing-dep", function(req, res) {
 
 	for (var i = 0; i < mods.length; i++) {
 		var mod = mods[i];
-		fs.appendFileSync("downloads.txt", mod + "\n");
+		fs.appendFileSync("missing_depends.txt", mod + "\n");
 	}
 
 	res.send("OK");
