@@ -65,6 +65,7 @@ function getInfoFromModLink(stats, mod, link) {
 	return new Promise(function(resolve, reject) {
 		if (!link || link.length == 0) {
 			reject("needs download link");
+			return;
 		}
 
 		for (var i = 0; i < reposervers.length; i++) {
@@ -78,7 +79,24 @@ function getInfoFromModLink(stats, mod, link) {
 				mod.repo = reposerver.getRepoURL(repo);
 				mod.repo_author = repo.user;
 				mod.repo_name = repo.repo;
-				reposerver.getAllInfo(repo, mod).then(resolve).catch(reject);
+				reposerver.getAllInfo(repo, mod).then(function(info) {
+					var url_cache = url_cachefile[mod.download_link];
+					if (url_cache) {
+						if (url_cache.status == 200) {
+							this.download_size = url_cache.size;
+						} else if (url_cache.status == -1) {
+							reject("download does not result in zip file");
+							return;
+						} else {
+							reject("download does not lead to an existent URL");
+							return;
+						}
+					} else {
+						reject("download unknown (run check_urls!)");
+						return;
+					}
+					resolve();
+				}).catch(reject);
 				return;
 			}
 		}
