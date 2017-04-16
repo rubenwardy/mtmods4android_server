@@ -191,6 +191,18 @@ module.exports = {
 	},
 	getAuthorModStatuses: function(author) {
 		var lookup = this.getModStatuses();
-		return lookup[author];
+		if (author == "all") {
+			var ret = [];
+			for (var key in lookup) {
+				if (lookup.hasOwnProperty(key)) {
+					for (var i = 0; i < lookup[key].length; i++) {
+						ret.push(lookup[key][i])
+					}
+				}
+			}
+			return ret;
+		} else {
+			return lookup[author];
+		}
 	}
 };
