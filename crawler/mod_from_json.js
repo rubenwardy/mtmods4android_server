@@ -79,44 +79,11 @@ function getInfoFromModLink(stats, mod, link) {
 				mod.repo = reposerver.getRepoURL(repo);
 				mod.repo_author = repo.user;
 				mod.repo_name = repo.repo;
-				reposerver.getAllInfo(repo, mod).then(function(info) {
-					var url_cache = url_cachefile[mod.download_link];
-					if (url_cache) {
-						if (url_cache.status == 200) {
-							this.download_size = url_cache.size;
-						} else if (url_cache.status == -1) {
-							reject("download does not result in zip file");
-							return;
-						} else {
-							reject("download does not lead to an existent URL");
-							return;
-						}
-					} else {
-						reject("download unknown (run check_urls!)");
-						return;
-					}
-					resolve();
-				}).catch(reject);
+				reposerver.getAllInfo(repo, mod).then(resolve).catch(reject);
 				return;
 			}
 		}
 
-		var url_cache = url_cachefile[link];
-		if (url_cache) {
-			if (url_cache.status == 200) {
-				this.download_size = url_cache.size;
-			} else if (url_cache.status == -1) {
-				reject("download does not result in zip file");
-				return;
-			} else {
-				reject("download does not lead to an existent URL");
-				return;
-			}
-		} else {
-			reject("download unknown (run check_urls!)");
-			return;
-		}
-		mod.download_link = link;
 		resolve();
 	});
 }
@@ -150,6 +117,23 @@ function processMod(stats, json) {
 						if (mod.download_link.indexOf(mod.basename) < 0) {
 							stats.c_potwrong++;
 						}
+
+						var url_cache = url_cachefile[mod.download_link];
+						if (url_cache) {
+							if (url_cache.status == 200) {
+								this.download_size = url_cache.size;
+							} else if (url_cache.status == -1) {
+								reject("download does not result in zip file");
+								return;
+							} else {
+								reject("download does not lead to an existent URL");
+								return;
+							}
+						} else {
+							reject("download unknown (run check_urls!)");
+							return;
+						}
+
 						addSuccess(stats, mod.author, mod);
 						resolve(mod);
 					}
