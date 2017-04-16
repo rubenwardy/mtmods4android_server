@@ -79,7 +79,7 @@ function getOldList() {
     return res;
 }
 
-function getMod(modname) {
+function getMod(modname, author) {
 	var retval = memCache.get("mod_" + modname);
 	if (retval) {
 		return retval;
@@ -95,7 +95,7 @@ function getMod(modname) {
 		var mod = list[i];
 		if (
 					(is_id && i == modname) ||
-					(!is_id && mod.basename == modname)
+					(!is_id && mod.basename == modname && (!author || mod.author == author))
 				) {
 			mod.id = i;
 			memCache.put("mod_" + modname, mod, cacheTime);

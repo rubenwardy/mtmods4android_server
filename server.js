@@ -135,7 +135,7 @@ app.get("/mod/:modname", function (req, res) {
 app.get("/download/:author/:modname", function(req, res) {
 	var author = req.params.author;
 	var modname = req.params.modname;
-	var mod = model.getMod(modname);
+	var mod = model.getMod(modname, author);
 
 	if (mod) {
 		console.log("Redirecting to download at " + mod.download_link);
@@ -148,7 +148,7 @@ app.get("/download/:author/:modname", function(req, res) {
 app.get("/screenshot/:author/:modname", function(req, res) {
 	var author = req.params.author;
 	var modname = req.params.modname;
-	var mod = model.getMod(modname);
+	var mod = model.getMod(modname, author);
 
 	if (mod && mod.repo_host == "github.com") {
 		var url = "https://raw.githubusercontent.com/" + mod.repo_author + "/" + mod.repo_name + "/master/screenshot.png";
