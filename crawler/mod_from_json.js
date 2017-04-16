@@ -94,6 +94,9 @@ function getInfoFromModLink(stats, mod, link) {
 				reject("download does not lead to an existent URL");
 				return;
 			}
+		} else {
+			reject("download unknown (run check_urls!)");
+			return;
 		}
 		mod.download_link = link;
 		resolve();
