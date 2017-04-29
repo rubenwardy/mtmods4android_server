@@ -171,7 +171,7 @@ app.get("/verified", function (req, res) {
 
 app.post("/v2/notify-mod-update", function(req, res) {
 	if (req.body && req.body.repository && req.body.repository.full_name) {
-		fs.appendFileSync("updates.txt", req.body.repository.full_nam + "\n");
+		fs.appendFileSync("data/updates.txt", req.body.repository.full_nam + "\n");
 		res.send("OK");
 	} else {
 		res.status(400).end("bad-request");
@@ -184,7 +184,7 @@ app.post("/v2/on-missing-dep", function(req, res) {
 
 	for (var i = 0; i < mods.length; i++) {
 		var mod = mods[i];
-		fs.appendFileSync("missing_depends.txt", mod + "\n");
+		fs.appendFileSync("data/missing_depends.txt", mod + "\n");
 	}
 
 	res.send("OK");
@@ -207,7 +207,7 @@ app.post("/v1/on-download", function(req, res) {
 	var author  = req.body.author || "";
 	var error = req.body.error || "";
 
-	fs.appendFileSync("downloads.txt", respcode + "\t" + size + "\t" + author + "\t" + modname + "\t" + link + "\t" + error + "\n");
+	fs.appendFileSync("data/downloads.txt", respcode + "\t" + size + "\t" + author + "\t" + modname + "\t" + link + "\t" + error + "\n");
 	res.end("OK");
 });
 

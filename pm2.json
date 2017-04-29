@@ -3,8 +3,8 @@
 		{
 			"name": "mtmm",
 			"script": "./server.js",
-			"watch": true,
-			"ignore_watch" : ["downloads.txt", "missing_depends.txt", "reports.json"],
+			"watch": ["server.js", "common/model.js"],
+			"ignore_watch" : ["data"],
 			"env": {
 				"PORT": "8080"
 			}

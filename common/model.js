@@ -4,7 +4,7 @@ var cacheTime = 1000*60*5;
 var reports = null;
 
 try {
-	reports = JSON.parse(fs.readFileSync("reports.json", "utf8"));
+	reports = JSON.parse(fs.readFileSync("data/reports.json", "utf8"));
 } catch(e) {
 	reports = {};
 }
@@ -129,7 +129,7 @@ function getPopularMods()
 			lookup[mod.author + "/" + mod.basename] = mod;
 		}
 
-		var lines = fs.readFileSync("downloads.txt", 'utf8').split("\n");
+		var lines = fs.readFileSync("data/downloads.txt", 'utf8').split("\n");
 		for (var i = 0; i < lines.length; i++) {
 			var parts = lines[i].split("\t");
 			if (parts.length > 4 && parts[0] == "200") {
@@ -165,7 +165,7 @@ function validateReport(res) {
 setInterval(function() {
 	// Save state
 	var text = JSON.stringify(reports);
-	fs.writeFileSync("reports.json", text, "utf8");
+	fs.writeFileSync("data/reports.json", text, "utf8");
 }, 10000);
 
 function report(res) {
