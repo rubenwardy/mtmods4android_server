@@ -4,8 +4,9 @@
 			"name": "mtmm",
 			"script": "./server.js",
 			"watch": true,
+			"ignore_watch" : ["downloads.txt", "missing_depends.txt", "reports.json"],
 			"env": {
-				 "PORT": "8080"
+				"PORT": "8080"
 			}
 		},
 	]
