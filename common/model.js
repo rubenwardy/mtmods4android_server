@@ -11,8 +11,10 @@ try {
 
 function getListNoReports()
 {
-    var json = memCache.get("listNoReports");
-	if (!json) {
+	var json = memCache.get("listNoReports");
+	if (json) {
+		console.log("getListNoReports cache hit")
+	} else {
 		console.log("Cache miss, regenerating listNoReports");
 		json = JSON.parse(fs.readFileSync("crawler/out/list.json", 'utf8'));
 		memCache.put("listNoReports", json, cacheTime);
@@ -25,32 +27,36 @@ function getList() {
 	if (!res) {
 		console.log("Cache miss, regenerating listWithReports");
 		res = getListNoReports();
-	    for (var i = 0; i < res.length; i++) {
-	        var mod = res[i];
-	        var idx = mod.author + "/" + mod.basename;
-	        var reps = reports[idx];
-	        if (reps) {
-	            mod.reports = {};
-	            for (var j = 0; j < reps.length; j++) {
-	                var report = reps[j];
-	                mod.reports[report.type] =
-	                    mod.reports[report.type] ? mod.reports[report.type] + 1 : 1;
-	            }
-	        }
-	    }
+		for (var i = 0; i < res.length; i++) {
+			var mod = res[i];
+			var idx = mod.author + "/" + mod.basename;
+			var reps = reports[idx];
+			if (reps) {
+				mod.reports = {};
+				for (var j = 0; j < reps.length; j++) {
+					var report = reps[j];
+					mod.reports[report.type] =
+						mod.reports[report.type] ? mod.reports[report.type] + 1 : 1;
+				}
+			}
+		}
 		memCache.put("listWithReports", res, cacheTime);
+	} else {
+		console.log("getList:listWithReports cache hit");
 	}
 
-    return res;
+	return res;
 }
 
 function getOldListNoReports()
 {
-    var json = memCache.get("oldListNoReports");
+	var json = memCache.get("oldListNoReports");
 	if (!json) {
 		console.log("Cache miss, regenerating listNoReports");
 		json = JSON.parse(fs.readFileSync("crawler/out/old_list.json", 'utf8'));
 		memCache.put("oldListNoReports", json, cacheTime);
+	} else {
+		console.log("Cache hit, getOldListNoReports");
 	}
 	return json;
 }
@@ -60,28 +66,31 @@ function getOldList() {
 	if (!res) {
 		console.log("Cache miss, regenerating listWithReports");
 		res = getOldListNoReports();
-	    for (var i = 0; i < res.length; i++) {
-	        var mod = res[i];
-	        var idx = mod.author + "/" + mod.basename;
-	        var reps = reports[idx];
-	        if (reps) {
-	            mod.reports = {};
-	            for (var j = 0; j < reps.length; j++) {
-	                var report = reps[j];
-	                mod.reports[report.type] =
-	                    mod.reports[report.type] ? mod.reports[report.type] + 1 : 1;
-	            }
-	        }
-	    }
+		for (var i = 0; i < res.length; i++) {
+			var mod = res[i];
+			var idx = mod.author + "/" + mod.basename;
+			var reps = reports[idx];
+			if (reps) {
+				mod.reports = {};
+				for (var j = 0; j < reps.length; j++) {
+					var report = reps[j];
+					mod.reports[report.type] =
+						mod.reports[report.type] ? mod.reports[report.type] + 1 : 1;
+				}
+			}
+		}
 		memCache.put("oldListWithReports", res, cacheTime);
+	} else {
+		console.log("Cache hit, getOldList");
 	}
 
-    return res;
+	return res;
 }
 
 function getMod(modname, author) {
 	var retval = memCache.get("mod_" + modname);
 	if (retval) {
+		console.log("cache hit, getMod");
 		return retval;
 	}
 
@@ -140,6 +149,8 @@ function getPopularMods()
 		});
 		retval = res.splice(0, 10);
 		memCache.put("popularMods", retval, cacheTime);
+	} else {
+		console.log("cache hit, getPopularMods")
 	}
 
 	return retval;
@@ -147,14 +158,14 @@ function getPopularMods()
 
 var accepted_types = ["mal", "dw", "other"];
 function validateReport(res) {
-    return res.author && res.modname && res.list &&
-        accepted_types.indexOf(res.type) >= 0;
+	return res.author && res.modname && res.list &&
+		accepted_types.indexOf(res.type) >= 0;
 }
 
 setInterval(function() {
-    // Save state
-    var text = JSON.stringify(reports);
-    fs.writeFileSync("reports.json", text, "utf8");
+	// Save state
+	var text = JSON.stringify(reports);
+	fs.writeFileSync("reports.json", text, "utf8");
 }, 10000);
 
 function report(res) {
