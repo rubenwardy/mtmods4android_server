@@ -48,6 +48,34 @@ function getList() {
 	return res;
 }
 
+function getMinimalList() {
+	const res = memCache.get("listMinimalNoReports");
+	if (res) {
+		console.log("Cache hit listMinimalNoReports");
+		return res;
+	}
+
+	const list = getListNoReports();
+	const ret = list.map((a) => {
+		let desc = a.description;
+		if (desc.length) {
+			desc = desc.substring(0, 100);
+		}
+
+		return {
+			author: a.author,
+			basename: a.basename,
+			title: a.title,
+			short_desc: desc.trim()
+		};
+	});
+
+	console.log("Cache miss listMinimalNoReports");
+	memCache.put("listMinimalNoReports", ret, cacheTime);
+	return ret;
+
+}
+
 function getOldListNoReports()
 {
 	var json = memCache.get("oldListNoReports");
@@ -184,6 +212,7 @@ module.exports = {
 	report: report,
 	getOldList: getOldList,
 	getOldListNoReports: getOldListNoReports,
+	getMinimalList: getMinimalList,
 	getList: getList,
 	getListNoReports: getListNoReports,
 	getMod: getMod,

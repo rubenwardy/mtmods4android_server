@@ -191,7 +191,26 @@ app.post("/v2/on-missing-dep", function(req, res) {
 });
 
 app.get("/v2/list", apicache("5 minutes"), function (req, res) {
-	res.send(model.getList());
+	res.send([
+		{
+			"topicId":"14280",
+			"author":"rubenwardy",
+			"type":"1",
+			"title":"Configuration error!",
+			"link":"",
+			"score":0,
+			"name":"configuration_error",
+			"verified":1,
+			"size":0,
+			"description":"Please complain to rubenwardy, he messed up",
+			"depends":["monoidal_effects"],
+			"soft_depends":["3d_armor"]
+		}
+	]);
+});
+
+app.get("/v3/list", apicache("5 minutes"), function (req, res) {
+	res.send(model.getMinimalList());
 });
 
 app.get("/v1/list", apicache("5 minutes"), function (req, res) {
