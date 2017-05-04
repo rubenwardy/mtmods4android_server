@@ -2,7 +2,7 @@
 
 ![build unknown](https://img.shields.io/badge/build-unknown-lightgrey.svg)
 ![coverage](https://img.shields.io/badge/coverage-NaN%25-red.svg)
-![node](https://img.shields.io/npm/v/npm.svg)
+![node](https://img.shields.io/badge/node-4.8.0-yellowgreen.svg)
 ![style](https://img.shields.io/badge/style-linuxish-brightgreen.svg)
 ![downloads](https://img.shields.io/badge/downloads-1%20\(me\)-red.svg)
 
