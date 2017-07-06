@@ -170,12 +170,13 @@ app.get("/verified", function (req, res) {
 });
 
 app.post("/v2/notify-mod-update", function(req, res) {
-	if (req.body && req.body.repository && req.body.repository.full_name) {
-		fs.appendFileSync("data/updates.txt", req.body.repository.full_nam + "\n");
-		res.send("OK");
-	} else {
-		res.status(400).end("bad-request");
-	}
+        if (req.body && req.body.repository && req.body.repository.full_name) {
+                const fs = require("fs");
+                fs.appendFileSync("data/updates.txt", req.body.repository.full_name + "\n");
+                res.send("OK");
+        } else {
+                res.status(400).end("bad-request");
+        }
 });
 
 app.post("/v2/on-missing-dep", function(req, res) {
