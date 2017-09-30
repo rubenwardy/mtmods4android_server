@@ -15,7 +15,8 @@
 <ul>
 {% for mod in mods %}
 	<li>
-		<a href="{{ mod.forum_url }}">{{ mod.title }}</a> [{{ mod.basename }}] by {{ mod.author }}<br />
+		<a href="{{ mod.forum_url }}">{{ mod.title }}</a> [{{ mod.basename }}] by {{ mod.author }}
+		{% if mod.type == 3 %}<b style="color:#ff3;">WIP!</b>{% endif %}<br />
 		<p>
 			{{ mod.description | truncate: 100, '…' }}
 		</p>

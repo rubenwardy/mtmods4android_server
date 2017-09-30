@@ -33,7 +33,9 @@
 {% for mod in mods %}
 	<li>
 		<span style="padding-right:10px">{{ forloop.index }})</span>
-		<a href="{{ mod.forum_url }}">{{ mod.title }}</a> by {{ mod.author }}<br />
+		<a href="{{ mod.forum_url }}">{{ mod.title }}</a> by {{ mod.author }}
+		{% if mod.type == 3 %}<b style="color:#ff3;">WIP!</b>{% endif %}
+		<br />
 		<p>
 			{{ mod.description | truncate: 100, '…' }}
 		</p>
