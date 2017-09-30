@@ -123,13 +123,16 @@ function processMod(stats, json) {
 							if (url_cache.status == 200) {
 								this.download_size = url_cache.size;
 							} else if (url_cache.status == -1) {
+								addModReason(stats, mod.author, mod, "download does not result in a zip file");
 								reject("download does not result in zip file");
 								return;
 							} else {
+								addModReason(stats, mod.author, mod, "download does not lead to a existent URL");
 								reject("download does not lead to an existent URL");
 								return;
 							}
 						} else {
+							addModReason(stats, mod.author, mod, "download unknown (this should never happen)");
 							reject("download unknown (run check_urls!)");
 							return;
 						}
