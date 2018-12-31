@@ -38,8 +38,9 @@ app.get("/download/:author/:modname", function(req, res) {
 });
 
 app.get("/screenshot/:author/:modname", function(req, res) {
-	var list = model.get();
+	var mods = model.get();
 	for (var i = 0; i < mods.length; i++) {
+		var mod = mods[i];
 		if (mod.author == req.params.author && mod.basename == req.params.modname) {
 			if (mod.thumbnail) {
 				res.redirect(mod.thumbnail)
