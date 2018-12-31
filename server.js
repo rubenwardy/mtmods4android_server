@@ -43,7 +43,7 @@ app.get("/screenshot/:author/:modname", function(req, res) {
 		var mod = mods[i];
 		if (mod.author == req.params.author && mod.basename == req.params.modname) {
 			if (mod.thumbnail) {
-				res.redirect(mod.thumbnail)
+				res.redirect(mod.thumbnail.replace("thumbnails/1/", "thumbnails/3/"))
 			} else {
 				res.status(404).send("Unable to find screenshot");
 			}
